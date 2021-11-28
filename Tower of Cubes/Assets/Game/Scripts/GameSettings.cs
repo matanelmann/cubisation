@@ -13,7 +13,7 @@ public class GameSettings : MonoBehaviour
     public static float TOWER_ROOT_Y;
     public static float CUBE_SCALE = 1.5f;
     public static float CUBE_LENGTH = 5.12f;
-    public static float CUBE_FORCE = 100f;
+    public static float CUBE_FORCE = 500f;
 
     private void Start()
     {
@@ -24,6 +24,6 @@ public class GameSettings : MonoBehaviour
         BOTTOM_EDGE = -1 * camSize;
 
         TOWER_X = RIGHT_EDGE * 0.5f;
-        TOWER_ROOT_Y = BOTTOM_EDGE + CUBE_LENGTH * CUBE_SCALE * 2;
+        TOWER_ROOT_Y = BOTTOM_EDGE + CUBE_LENGTH * CUBE_SCALE * 1.5f;
     }
 }
