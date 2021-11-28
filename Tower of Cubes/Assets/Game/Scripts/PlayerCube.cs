@@ -46,10 +46,10 @@ public class PlayerCube : MonoBehaviour
                 PushCube(dragLength);
             }
         }
-        if (dragging && (dragStartPos - mousePos.x >= cubeLength / 4))
+        /*if (dragging && (dragStartPos - mousePos.x >= cubeLength / 4))
         {
 
-        }
+        }*/
     }
     private void PushCube(float dragLength)
     {
@@ -65,5 +65,4 @@ public class PlayerCube : MonoBehaviour
         }
         return false;
     }
-
 }
