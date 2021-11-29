@@ -5,7 +5,6 @@ using UnityEngine;
 public class Tower : MonoBehaviour
 {
     private List<Cube> cubesList;
-    private float cubeLength = GameSettings.CUBE_LENGTH * GameSettings.CUBE_SCALE;
     void Start()
     {
         cubesList = new List<Cube>();
@@ -25,7 +24,7 @@ public class Tower : MonoBehaviour
     {
         for (int i = 0; i < GameSettings.TOWER_HEIGHT; i++)
         {
-            CreateCube(GameSettings.TOWER_ROOT_Y + i * 2 * cubeLength);
+            CreateCube(GameSettings.TOWER_ROOT_Y + i * 2 * GameSettings.CUBE_LENGTH);
         }
     }
 

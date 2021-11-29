@@ -5,12 +5,10 @@ using UnityEngine;
 public class PlayerCube : MonoBehaviour
 {
     Transform playerCube;
-    Transform arrow;
     Rigidbody2D cubeRb;
     private bool dragging = false;
     private float dragStartPos;
     private float dragEndPos;
-    float cubeLength = GameSettings.CUBE_LENGTH * GameSettings.CUBE_SCALE;
     
     void Start()
     {
@@ -27,6 +25,7 @@ public class PlayerCube : MonoBehaviour
         playerCube.position = new Vector3(GameSettings.LEFT_EDGE / 2, GameSettings.TOWER_ROOT_Y);
         playerCube.localScale = new Vector3(GameSettings.CUBE_SCALE, GameSettings.CUBE_SCALE, GameSettings.CUBE_SCALE);
         cubeRb = playerCube.GetComponent<Rigidbody2D>();
+        cubeRb.gravityScale = GameSettings.CUBE_GRAVITY;
     }
     private void CheckInput()
     {
@@ -41,7 +40,7 @@ public class PlayerCube : MonoBehaviour
             dragEndPos = mousePos.x;
             dragging = false;
             float dragLength = dragStartPos - dragEndPos;
-            if (dragLength > (cubeLength / 4)) // Prevent pushing the cube to the left
+            if (dragLength > (GameSettings.CUBE_LENGTH / 4)) // Prevent pushing the cube to the left
             {
                 PushCube(dragLength);
             }
@@ -60,7 +59,7 @@ public class PlayerCube : MonoBehaviour
     {
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         float mouseX = mousePos.x, mouseY = mousePos.y;
-        if ((mouseX >= playerCube.position.x && mouseX <= playerCube.position.x + cubeLength) && (mouseY >= playerCube.position.y && mouseY <= playerCube.position.y + cubeLength)) { 
+        if ((mouseX >= playerCube.position.x && mouseX <= playerCube.position.x + GameSettings.CUBE_LENGTH) && (mouseY >= playerCube.position.y && mouseY <= playerCube.position.y + GameSettings.CUBE_LENGTH)) { 
             return true;
         }
         return false;
