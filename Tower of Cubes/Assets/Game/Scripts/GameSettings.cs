@@ -10,11 +10,12 @@ public class GameSettings : MonoBehaviour
     public static float BOTTOM_EDGE;
     public static float TOWER_X;
     public static float TOWER_ROOT_Y;
-    public static int TOWER_HEIGHT = 12;
+    public static int TOWER_HEIGHT = 4;
     public static float CUBE_SCALE = 1.5f;
     public static float CUBE_LENGTH = 5.12f * CUBE_SCALE;
     public static float CUBE_FORCE = 500f;
-    public static float CUBE_GRAVITY = 8f;
+    public static float CUBE_GRAVITY = 4f;
+    public static float PLATFORM_LENGTH = 39.5f;
 
     private void Start()
     {

@@ -10,11 +10,11 @@ public class Tower : MonoBehaviour
         cubesList = new List<Cube>();
         CreateBuilding();
     }
-    private void CreateCube(float yPosition)
+    private void CreateCube(float yPosition, float cubeScale)
     {
         Transform cubeTransform = Instantiate(GameAssets.GetInstance().redCube, transform.parent);
         cubeTransform.position = new Vector3(GameSettings.TOWER_X, yPosition);
-        cubeTransform.localScale = new Vector3(GameSettings.CUBE_SCALE, GameSettings.CUBE_SCALE, GameSettings.CUBE_SCALE);
+        cubeTransform.localScale = new Vector3(cubeScale, cubeScale, cubeScale);
         Cube cube = new Cube(cubeTransform);
 
         cubesList.Add(cube);
@@ -24,7 +24,7 @@ public class Tower : MonoBehaviour
     {
         for (int i = 0; i < GameSettings.TOWER_HEIGHT; i++)
         {
-            CreateCube(GameSettings.TOWER_ROOT_Y + i * 2 * GameSettings.CUBE_LENGTH);
+            CreateCube(GameSettings.TOWER_ROOT_Y + i * 2 * GameSettings.CUBE_LENGTH, GameSettings.CUBE_SCALE * (GameSettings.TOWER_HEIGHT-i)/4);
         }
     }
 
