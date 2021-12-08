@@ -31,7 +31,8 @@ public class Platform : MonoBehaviour
 
     private void CreatePlatfore()
     {
-        this.transform.position = new Vector3(PlatformXPosition(), PlatformYPosition());
+        Transform platformTransform = Instantiate(GameAssets.GetInstance().platform, transform.parent);
+        platformTransform.position = new Vector3(PlatformXPosition(), PlatformYPosition());
         i += 1;
         j += 1;
         //this.transform.localScale = new Vector3(13, -16, 0);
@@ -41,12 +42,14 @@ public class Platform : MonoBehaviour
 
     private float PlatformYPosition()
     {
-        return _tower.GetTowerLength() - i * GameSettings.CUBE_LENGTH;
+        Debug.Log((_tower.GetTowerLength() - i) * GameSettings.CUBE_LENGTH);
+        return (_tower.GetTowerLength() - i)* GameSettings.CUBE_LENGTH;
+        
     }
 
     private float PlatformXPosition()
     {
-        CUBE_X_POS = _tower.cubesList[_tower.GetTowerLength() - i -1].getTransform().position.x;
+        CUBE_X_POS = _tower.cubesList[_tower.GetTowerLength() - i].getTransform().position.x;
 
         return (CUBE_X_POS - GameSettings.LEFT_EDGE - GameSettings.PLATFORM_LENGTH) / GameSettings.PLATFORM_LENGTH;
     }

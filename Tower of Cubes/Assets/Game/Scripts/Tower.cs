@@ -29,7 +29,7 @@ public class Tower : MonoBehaviour
     {
         for (int i = 0; i < GameSettings.TOWER_HEIGHT; i++)
         {
-            CreateCube(GameSettings.TOWER_ROOT_Y + i * 2 * GameSettings.CUBE_LENGTH, GameSettings.CUBE_SCALE * (GameSettings.TOWER_HEIGHT-i)/4);
+            CreateCube(GameSettings.TOWER_ROOT_Y + i * 2 * GameSettings.CUBE_LENGTH, GameSettings.CUBE_SCALE);
         }
     }
 
