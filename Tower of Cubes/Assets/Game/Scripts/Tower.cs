@@ -4,12 +4,17 @@ using UnityEngine;
 
 public class Tower : MonoBehaviour
 {
-    private List<Cube> cubesList;
-    void Start()
-    {
+    [HideInInspector] public List<Cube> cubesList;
+
+    void Awake() {
         cubesList = new List<Cube>();
         CreateBuilding();
     }
+
+    public int GetTowerLength() {
+        return cubesList.Count;
+    }
+
     private void CreateCube(float yPosition, float cubeScale)
     {
         Transform cubeTransform = Instantiate(GameAssets.GetInstance().redCube, transform.parent);
@@ -28,9 +33,9 @@ public class Tower : MonoBehaviour
         }
     }
 
-    private class Cube
+    public class Cube
     {
-        private Transform cubeTransform;
+        public Transform cubeTransform;
         public Cube(Transform cubeTransform)
         {
             this.cubeTransform = cubeTransform;
