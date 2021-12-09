@@ -3,54 +3,53 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Platform : MonoBehaviour
-
 {
-    //list of cubes- can take the tranform og the cuurnt cube. by len
-    //Y- like the cube
-    //offset scale x- (x cube - left edge of the screen -platform len)/pltforn len 
-    // Start is called before the first frame update
-    //attch
-    //isnt it a proble the Cube and List are private?
+    static Vector3 nextPosition;
+    static Vector3 nextScale;
+    private static bool moveToNextPosition = false;
+    static Transform pt;
 
-    [HideInInspector] public Tower _tower;
-    private static int i = 1; // i will remain as in the last call of the function
-    private static int j = 0; // j will remain as in the last call of the function
-    private static float CUBE_X_POS;
+    public static void CreatePlatform()
+    {
+        pt = Instantiate(GameAssets.GetInstance().platform, GameSettings.GameTransform);
+        pt.position = new Vector3(GameSettings.LEFT_EDGE, GameSettings.GROUND_Y + (GameSettings.TOWER_HEIGHT - 1) * GameSettings.CUBE_LENGTH);
+        pt.localScale = new Vector3(1 + (GameSettings.TOWER_X - GameSettings.LEFT_EDGE - GameSettings.PLATFORM_LENGTH) / GameSettings.PLATFORM_LENGTH, 1);
+    }
+
+    public static float getPlatformY()
+    {
+        return pt.position.y;
+    }
+
+    public static void MovePlatform()
+    {
+        moveToNextPosition = true;
+    }
 
     void Start()
     {
-        _tower = FindObjectOfType<Tower>();
-        CreatePlatfore();
+        nextPosition = new Vector3(GameSettings.LEFT_EDGE, GameSettings.GROUND_Y + (GameSettings.TOWER_HEIGHT - 2) * GameSettings.CUBE_LENGTH);
     }
 
-    // Update is called once per frame
     void Update()
     {
-        //to be filled 
+        if (moveToNextPosition && GameHandler.Play)
+        {
+            if (pt.position.Equals(nextPosition)) // Platform finished moving to the next position
+            {
+                setNextPlatformPosition();
+                moveToNextPosition = false;
+                PlayerCube.CreatePlayerCube(); // Spawn a new PlayerCube
+            }
+            else // Continue moving the platform
+            {
+                pt.position = Vector3.MoveTowards(pt.position, nextPosition, GameSettings.PLATFORM_MOVING_SPEED * Time.deltaTime);
+            }
+        }
     }
 
-    private void CreatePlatfore()
+    private static void setNextPlatformPosition()
     {
-        Transform platformTransform = Instantiate(GameAssets.GetInstance().platform, transform.parent);
-        platformTransform.position = new Vector3(PlatformXPosition(), PlatformYPosition());
-        i += 1;
-        j += 1;
-        //this.transform.localScale = new Vector3(13, -16, 0);
-    }
-
-    //Calculates the Y posion for the platform by the current cubes Y possion. 
-
-    private float PlatformYPosition()
-    {
-        
-        return (_tower.GetTowerLength() - i)* GameSettings.CUBE_LENGTH - 50f;
-        
-    }
-
-    private float PlatformXPosition()
-    {
-        CUBE_X_POS = _tower.cubesList[_tower.GetTowerLength() - i].getTransform().position.x;
-
-        return (CUBE_X_POS - GameSettings.LEFT_EDGE - GameSettings.PLATFORM_LENGTH) / (GameSettings.PLATFORM_LENGTH -28.2f);
+        nextPosition = new Vector3(GameSettings.LEFT_EDGE, GameSettings.GROUND_Y + (Tower.cubesList.Count - 2) * GameSettings.CUBE_LENGTH);
     }
 }
