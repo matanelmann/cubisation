@@ -42,8 +42,8 @@ public class Platform : MonoBehaviour
 
     private float PlatformYPosition()
     {
-        Debug.Log((_tower.GetTowerLength() - i) * GameSettings.CUBE_LENGTH);
-        return (_tower.GetTowerLength() - i)* GameSettings.CUBE_LENGTH;
+        
+        return (_tower.GetTowerLength() - i)* GameSettings.CUBE_LENGTH - 50f;
         
     }
 
@@ -51,6 +51,6 @@ public class Platform : MonoBehaviour
     {
         CUBE_X_POS = _tower.cubesList[_tower.GetTowerLength() - i].getTransform().position.x;
 
-        return (CUBE_X_POS - GameSettings.LEFT_EDGE - GameSettings.PLATFORM_LENGTH) / GameSettings.PLATFORM_LENGTH;
+        return (CUBE_X_POS - GameSettings.LEFT_EDGE - GameSettings.PLATFORM_LENGTH) / (GameSettings.PLATFORM_LENGTH -28.2f);
     }
 }
