@@ -5,7 +5,7 @@ using UnityEngine;
 public class RedCube : MonoBehaviour
 {
     Rigidbody2D cubeRb;
-    public static bool collided = false;
+    //public static bool collided = false;
     void Start()
     {
         cubeRb = gameObject.GetComponent<Rigidbody2D>();

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Platform : MonoBehaviour
 {
-    static Vector3 nextPosition;
+    static Vector3 nextPosition = Vector3.zero;
     static Vector3 nextScale;
     private static bool moveToNextPosition = false;
     static Transform pt;
@@ -12,8 +12,8 @@ public class Platform : MonoBehaviour
     public static void CreatePlatform()
     {
         pt = Instantiate(GameAssets.GetInstance().platform, GameSettings.GameTransform);
-        pt.position = new Vector3(GameSettings.LEFT_EDGE, GameSettings.GROUND_Y + (GameSettings.TOWER_HEIGHT - 1) * GameSettings.CUBE_LENGTH);
-        pt.localScale = new Vector3(1 + (GameSettings.TOWER_X - GameSettings.LEFT_EDGE - GameSettings.PLATFORM_LENGTH) / GameSettings.PLATFORM_LENGTH, 1);
+        pt.position = new Vector3(GameSettings.LEFT_EDGE, Tower.GetTowerHeight() - Tower.getTopCube()[0].length);
+        pt.localScale = new Vector3(1 + (Tower.getTopCube()[1].cubeTransform.position.x - GameSettings.LEFT_EDGE - GameSettings.PLATFORM_LENGTH) / GameSettings.PLATFORM_LENGTH, 1);
     }
 
     public static float getPlatformY()
@@ -23,12 +23,8 @@ public class Platform : MonoBehaviour
 
     public static void MovePlatform()
     {
+        setNextPlatformPosition();
         moveToNextPosition = true;
-    }
-
-    void Start()
-    {
-        nextPosition = new Vector3(GameSettings.LEFT_EDGE, GameSettings.GROUND_Y + (GameSettings.TOWER_HEIGHT - 2) * GameSettings.CUBE_LENGTH);
     }
 
     void Update()
@@ -37,19 +33,33 @@ public class Platform : MonoBehaviour
         {
             if (pt.position.Equals(nextPosition)) // Platform finished moving to the next position
             {
-                setNextPlatformPosition();
+                //setNextPlatformPosition();
                 moveToNextPosition = false;
+                PlayerCube.cubeRb.constraints = RigidbodyConstraints2D.FreezePositionX;
                 PlayerCube.CreatePlayerCube(); // Spawn a new PlayerCube
             }
             else // Continue moving the platform
             {
+                if (nextPosition.Equals(Vector3.zero))
+                {
+                    setNextPlatformPosition();
+                }
                 pt.position = Vector3.MoveTowards(pt.position, nextPosition, GameSettings.PLATFORM_MOVING_SPEED * Time.deltaTime);
+                pt.localScale = Vector3.MoveTowards(pt.localScale, nextScale, (GameSettings.PLATFORM_MOVING_SPEED / 50) * Time.deltaTime);
             }
         }
     }
 
-    private static void setNextPlatformPosition()
+    public static void setNextPlatformPosition()
     {
-        nextPosition = new Vector3(GameSettings.LEFT_EDGE, GameSettings.GROUND_Y + (Tower.cubesList.Count - 2) * GameSettings.CUBE_LENGTH);
+        if (Tower.TowerEmpty())
+        {
+            nextPosition = new Vector3(GameSettings.LEFT_EDGE, GameSettings.BOTTOM_EDGE);
+        }
+        else
+        {
+            nextPosition = new Vector3(GameSettings.LEFT_EDGE, pt.position.y - Tower.getTopCube()[0].length);
+            nextScale = new Vector3(1 + (Tower.getTopCube()[1].cubeTransform.position.x - GameSettings.LEFT_EDGE - GameSettings.PLATFORM_LENGTH) / GameSettings.PLATFORM_LENGTH, 1);
+        }
     }
 }

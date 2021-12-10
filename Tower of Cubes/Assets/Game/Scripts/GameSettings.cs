@@ -10,11 +10,10 @@ public class GameSettings : MonoBehaviour
     public static float TOP_EDGE;
     public static float BOTTOM_EDGE;
     public static float TOWER_X;
-    public static float TOWER_ROOT_Y;
-    public static int TOWER_HEIGHT = 2;
-    public static float CUBE_SCALE = 1.5f;
+    public static int TOWER_HEIGHT = 3;
+    public static float CUBE_SCALE = 2.5f;
     public static float CUBE_LENGTH = 5.12f * CUBE_SCALE;
-    public static float CUBE_FORCE = 400f;
+    public static float CUBE_FORCE = 350f;
     public static float CUBE_GRAVITY = 4f;
     public static float CUBE_MASS = 1.5f;
     public static float PLATFORM_LENGTH = 39.135f;
@@ -32,6 +31,5 @@ public class GameSettings : MonoBehaviour
         BOTTOM_EDGE = -1 * camSize;
 
         TOWER_X = RIGHT_EDGE * 0.5f;
-        TOWER_ROOT_Y = BOTTOM_EDGE + CUBE_LENGTH * CUBE_SCALE * 1.5f;
     }
 }

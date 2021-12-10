@@ -17,6 +17,7 @@ public class GameHandler : MonoBehaviour
     {
         if (Play)
         {
+            PlayerCube.CheckInput();
             Tower.UpdateTower();
         }
     }
@@ -26,5 +27,12 @@ public class GameHandler : MonoBehaviour
         // To-do
         Play = false;
         Debug.Log("Game Over");
+    }
+
+    public static void LevelPassed()
+    {
+        // To-do
+        Play = false;
+        Debug.Log("Level Passed");
     }
 }

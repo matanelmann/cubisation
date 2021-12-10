@@ -7,27 +7,33 @@ public class PlayerInstance : MonoBehaviour
     AudioSource sound;
     public static bool allowSound = true;
     public static float initial_Y;
+    private static ContactPoint2D[] contacts = new ContactPoint2D[10];
+    private static float length;
 
     private void Start()
     {
+        length = transform.localScale.x * 5.12f;
         initial_Y = transform.position.y;
         sound = gameObject.GetComponent<AudioSource>();
     }
     private void OnCollisionEnter2D(Collision2D col)
     {
-        if (allowSound && col.collider.transform == Tower.getTopCube().cubeTransform) // If the PlayerCube hit the top RedCube
+        col.GetContacts(contacts);
+        if (!Tower.TowerEmpty() && allowSound && col.collider.transform == Tower.getTopCube()[0].cubeTransform && SideCollision(contacts)) // If the PlayerCube hit the top RedCube
         {
             sound.Play();
             allowSound = false;
             Invoke("CallMovePlatform", 2f);
-            Debug.Log("COLLISION");
         }
     }
+
+    
     void Update()
     {
         if (cubeOutOfBounds())
         {
             Destroy(gameObject);
+            Debug.Log("cubeOutOfBounds");
             GameHandler.GameOver();
         }
     }
@@ -42,7 +48,6 @@ public class PlayerInstance : MonoBehaviour
 
     private bool cubeOnTower()
     {
-        Debug.Log(initial_Y);
         if (transform.position.y < initial_Y - GameSettings.CUBE_LENGTH) // If the cube fell down from the tower
         {
             return false;
@@ -52,17 +57,27 @@ public class PlayerInstance : MonoBehaviour
 
     private void CallMovePlatform()
     {
-        Debug.Log("newTopCube: " + Tower.newTopCube);
-        Debug.Log("cubeOnTower: " + cubeOnTower());
         if (Tower.newTopCube && cubeOnTower())
         {
-            Debug.Log("Calling the platform to move");
             Tower.newTopCube = false;
             Platform.MovePlatform();
         }
         else
         {
+            Debug.Log("CallMovePlatform");
             GameHandler.GameOver();
         }
+    }
+    private bool SideCollision(ContactPoint2D[] contacts)
+    {
+        foreach (ContactPoint2D cp in contacts)
+        {
+            if (cp.point.y >= transform.position.y + 0.1 * length)
+            {
+                return true;
+
+            }
+        }
+        return false;
     }
 }

@@ -5,24 +5,20 @@ using UnityEngine;
 public class PlayerCube : MonoBehaviour
 {
     public static Transform playerCube;
-    static Rigidbody2D cubeRb;
-    private float dragStartPos;
-    private float dragEndPos;
+    public static Rigidbody2D cubeRb;
+    private static float dragStartPos;
+    private static float dragEndPos;
 
-    private void Update()
-    {
-        CheckInput();
-    }
     public static void CreatePlayerCube()
     {
         playerCube = Instantiate(GameAssets.GetInstance().blueCube, GameSettings.GameTransform);
         playerCube.position = new Vector3(GameSettings.LEFT_EDGE / 1.5f, Platform.getPlatformY() + GameSettings.CUBE_LENGTH / 2);
-        playerCube.localScale = new Vector3(GameSettings.CUBE_SCALE, GameSettings.CUBE_SCALE, GameSettings.CUBE_SCALE);
+        playerCube.localScale = Tower.getTopCube()[0].cubeTransform.localScale;
         cubeRb = playerCube.GetComponent<Rigidbody2D>();
         cubeRb.gravityScale = GameSettings.CUBE_GRAVITY;
         cubeRb.mass = GameSettings.CUBE_MASS;
     }
-    private void CheckInput()
+    public static void CheckInput()
     {
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         if (Input.GetMouseButtonDown(0) && MouseOverCube())
@@ -39,12 +35,12 @@ public class PlayerCube : MonoBehaviour
             }
         }
     }
-    private void PushCube(float dragLength)
+    private static void PushCube(float dragLength)
     {
         cubeRb.AddForce(Vector2.right * GameSettings.CUBE_FORCE * dragLength);
     }
 
-    private bool MouseOverCube()
+    private static bool MouseOverCube()
     {
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         float mouseX = mousePos.x, mouseY = mousePos.y;
