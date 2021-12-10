@@ -8,6 +8,7 @@ public class PlayerCube : MonoBehaviour
     public static Rigidbody2D cubeRb;
     private static float dragStartPos;
     private static float dragEndPos;
+    // TrajectoryLine tl;
 
     public static void CreatePlayerCube()
     {
@@ -17,6 +18,8 @@ public class PlayerCube : MonoBehaviour
         cubeRb = playerCube.GetComponent<Rigidbody2D>();
         cubeRb.gravityScale = GameSettings.CUBE_GRAVITY;
         cubeRb.mass = GameSettings.CUBE_MASS;
+        
+        // tl = GetComponent<TrajectoryLine>();
     }
     public static void CheckInput()
     {
@@ -25,6 +28,13 @@ public class PlayerCube : MonoBehaviour
         {
             dragStartPos = mousePos.x;
         }
+
+        // if (Input.GetMouseButton(0))
+        // {
+        //     Vector3 currentPoint = mousePos.x;
+        //     tl.RenderLine(startPoint, currentPoint);
+        // }
+
         if (Input.GetMouseButtonUp(0))
         {
             dragEndPos = mousePos.x;
@@ -33,6 +43,8 @@ public class PlayerCube : MonoBehaviour
             {
                 PushCube(dragLength);
             }
+            // 
+            // tl.EndLine();
         }
     }
     private static void PushCube(float dragLength)
