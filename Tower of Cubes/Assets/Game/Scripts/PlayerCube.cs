@@ -6,9 +6,8 @@ public class PlayerCube : MonoBehaviour
 {
     public static Transform playerCube;
     public static Rigidbody2D cubeRb;
-    private static float dragStartPos;
-    private static float dragEndPos;
-    // TrajectoryLine tl;
+    private static Vector3 dragStartPos;
+    private static Vector3 dragEndPos;
 
     public static void CreatePlayerCube()
     {
@@ -18,33 +17,29 @@ public class PlayerCube : MonoBehaviour
         cubeRb = playerCube.GetComponent<Rigidbody2D>();
         cubeRb.gravityScale = GameSettings.CUBE_GRAVITY;
         cubeRb.mass = GameSettings.CUBE_MASS;
-        
-        // tl = GetComponent<TrajectoryLine>();
     }
     public static void CheckInput()
     {
-        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0, 0, 1);
         if (Input.GetMouseButtonDown(0) && MouseOverCube())
         {
-            dragStartPos = mousePos.x;
+            dragStartPos = mousePos;
         }
 
-        // if (Input.GetMouseButton(0))
-        // {
-        //     Vector3 currentPoint = mousePos.x;
-        //     tl.RenderLine(startPoint, currentPoint);
-        // }
+        if (Input.GetMouseButton(0))
+        {
+            TrajectoryLine.RenderLine(dragStartPos, mousePos);
+        }
 
         if (Input.GetMouseButtonUp(0))
         {
-            dragEndPos = mousePos.x;
-            float dragLength = dragStartPos - dragEndPos;
+            dragEndPos = mousePos;
+            float dragLength = dragStartPos.x - dragEndPos.x;
             if (dragLength > (GameSettings.CUBE_LENGTH / 4)) // Prevent pushing the cube to the left
             {
                 PushCube(dragLength);
             }
-            // 
-            // tl.EndLine();
+            TrajectoryLine.EndLine();
         }
     }
     private static void PushCube(float dragLength)
