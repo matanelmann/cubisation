@@ -5,6 +5,7 @@ using UnityEngine;
 public class GameSettings : MonoBehaviour
 {
     public static Transform GameTransform;
+    public static float SCREEN_RATIO = 20f / 9f;
     public static float RIGHT_EDGE;
     public static float LEFT_EDGE;
     public static float TOP_EDGE;
@@ -25,7 +26,7 @@ public class GameSettings : MonoBehaviour
     {
         GameTransform = GameObject.Find("Game").transform;
         float camSize = Camera.main.orthographicSize;
-        RIGHT_EDGE = camSize / (20.0f / 9.0f);
+        RIGHT_EDGE = camSize / SCREEN_RATIO;
         LEFT_EDGE = -1 * RIGHT_EDGE;
         TOP_EDGE = camSize;
         BOTTOM_EDGE = -1 * camSize;
