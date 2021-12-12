@@ -8,6 +8,8 @@ public class PlayerCube : MonoBehaviour
     public static Rigidbody2D cubeRb;
     private static Vector3 dragStartPos;
     private static Vector3 dragEndPos;
+    public static GameObject[] popups;
+    public static int popupIndex;
 
     public static void CreatePlayerCube()
     {
@@ -20,26 +22,37 @@ public class PlayerCube : MonoBehaviour
     }
     public static void CheckInput()
     {
-        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0, 0, 1);
-        if (Input.GetMouseButtonDown(0) && MouseOverCube())
+        for (int i = 0; i < popups.Length; i++)
         {
-            dragStartPos = mousePos;
-        }
-
-        if (Input.GetMouseButton(0))
-        {
-            TrajectoryLine.RenderLine(dragStartPos, mousePos);
-        }
-
-        if (Input.GetMouseButtonUp(0))
-        {
-            dragEndPos = mousePos;
-            float dragLength = dragStartPos.x - dragEndPos.x;
-            if (dragLength > (GameSettings.CUBE_LENGTH / 4)) // Prevent pushing the cube to the left
-            {
-                PushCube(dragLength);
+            if (i == popupIndex) {
+                popups[popupIndex].SetActive(true);
+            } else {
+                popups[popupIndex].SetActive(false);
             }
-            TrajectoryLine.EndLine();
+        }
+
+        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0, 0, 1);
+        if (popupIndex == 0) {
+            if (Input.GetMouseButtonDown(0) && MouseOverCube())
+            {
+                dragStartPos = mousePos;
+            }
+
+            if (Input.GetMouseButton(0))
+            {
+                TrajectoryLine.RenderLine(dragStartPos, mousePos);
+            }
+
+            if (Input.GetMouseButtonUp(0))
+            {
+                dragEndPos = mousePos;
+                float dragLength = dragStartPos.x - dragEndPos.x;
+                if (dragLength > (GameSettings.CUBE_LENGTH / 4)) // Prevent pushing the cube to the left
+                {
+                    PushCube(dragLength);
+                }
+                TrajectoryLine.EndLine();
+            }
         }
     }
     private static void PushCube(float dragLength)
@@ -57,7 +70,7 @@ public class PlayerCube : MonoBehaviour
         return false;
     }
 
-    public static void DestoryPlayer()
+  public static void DestroyPlayer()
     {
         Destroy(playerCube.gameObject);
     }

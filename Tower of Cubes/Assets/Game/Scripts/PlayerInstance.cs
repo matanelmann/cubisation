@@ -32,9 +32,18 @@ public class PlayerInstance : MonoBehaviour
     {
         if (cubeOutOfBounds())
         {
-            Destroy(gameObject);
-            Debug.Log("cubeOutOfBounds");
-            GameHandler.GameOver();
+            if(PlayerCube.popupIndex == 1) {
+                
+                //text to strong
+                Tower.DestroyTower();
+                PlayerCube.DestroyPlayer();
+                Tower.CreateTower();
+                PlayerCube.CreatePlayerCube();
+
+            }
+            // Destroy(gameObject);
+            // Debug.Log("cubeOutOfBounds");
+            // GameHandler.GameOver();
         }
     }
     private bool cubeOutOfBounds()
@@ -60,12 +69,19 @@ public class PlayerInstance : MonoBehaviour
         if (Tower.newTopCube && cubeOnTower())
         {
             Tower.newTopCube = false;
+            //text grat job try again
             Platform.MovePlatform();
         }
         else
         {
-            Debug.Log("CallMovePlatform");
-            GameHandler.GameOver();
+            
+            //text to gentle
+            Tower.DestroyTower();
+            PlayerCube.DestroyPlayer();
+            Tower.CreateTower();
+            PlayerCube.CreatePlayerCube();
+            // Debug.Log("CallMovePlatform");
+            // GameHandler.GameOver();
         }
     }
     private bool SideCollision(ContactPoint2D[] contacts)
