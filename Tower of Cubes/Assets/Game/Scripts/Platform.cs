@@ -33,9 +33,7 @@ public class Platform : MonoBehaviour
         {
             if (pt.position.Equals(nextPosition)) // Platform finished moving to the next position
             {
-                //setNextPlatformPosition();
                 moveToNextPosition = false;
-                PlayerCube.cubeRb.constraints = RigidbodyConstraints2D.FreezePositionX;
                 PlayerCube.CreatePlayerCube(); // Spawn a new PlayerCube
             }
             else // Continue moving the platform

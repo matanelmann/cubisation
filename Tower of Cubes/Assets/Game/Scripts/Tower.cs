@@ -30,7 +30,6 @@ public class Tower : MonoBehaviour
             scale = GameSettings.CUBE_SCALE * Mathf.Pow(0.85f, i);
             length = scale * 5.12f;
             CreateCube((GameSettings.TOWER_X - length/2), GetTowerHeight(), scale);
-            //CreateCube(GameSettings.TOWER_ROOT_Y + i * 2 * GameSettings.CUBE_LENGTH, GameSettings.CUBE_SCALE);
         }
     }
 
@@ -64,6 +63,11 @@ public class Tower : MonoBehaviour
         return cubes;
     }
 
+    public static Cube getBottomCube()
+    {
+        return cubesList[0];
+    }
+
     public static bool TowerEmpty()
     {
         return cubesList.Count <= 1;
@@ -80,6 +84,14 @@ public class Tower : MonoBehaviour
             {
                 GameHandler.LevelPassed();
             }
+        }
+    }
+
+    public static void DestroyTower()
+    {
+        foreach (Cube cube in cubesList)
+        {
+            Destroy(cube.cubeTransform.gameObject);
         }
     }
 }

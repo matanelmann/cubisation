@@ -56,4 +56,9 @@ public class PlayerCube : MonoBehaviour
         }
         return false;
     }
+
+    public static void DestoryPlayer()
+    {
+        Destroy(playerCube.gameObject);
+    }
 }

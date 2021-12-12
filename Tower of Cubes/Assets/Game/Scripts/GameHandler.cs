@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class GameHandler : MonoBehaviour
 {
+    static AudioSource sound;
     public static bool Play = true;
     void Start()
     {
         Tower.CreateTower();
         Platform.CreatePlatform();
         PlayerCube.CreatePlayerCube();
+        sound = gameObject.GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -32,6 +34,7 @@ public class GameHandler : MonoBehaviour
     public static void LevelPassed()
     {
         // To-do
+        sound.Play();
         Play = false;
         Debug.Log("Level Passed");
     }
