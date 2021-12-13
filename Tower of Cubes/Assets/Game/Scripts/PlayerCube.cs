@@ -9,7 +9,7 @@ public class PlayerCube : MonoBehaviour
     private static Vector3 dragStartPos;
     private static Vector3 dragEndPos;
     public static GameObject[] popups;
-    public static int popupIndex;
+    //public static int popupIndex;
 
     public static void CreatePlayerCube()
     {
@@ -22,17 +22,17 @@ public class PlayerCube : MonoBehaviour
     }
     public static void CheckInput()
     {
-        for (int i = 0; i < popups.Length; i++)
+        /*for (int i = 0; i < popups.Length; i++)
         {
             if (i == popupIndex) {
                 popups[popupIndex].SetActive(true);
             } else {
                 popups[popupIndex].SetActive(false);
             }
-        }
+        }*/
 
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0, 0, 1);
-        if (popupIndex == 0) {
+        //if (popupIndex == 0) {
             if (Input.GetMouseButtonDown(0) && MouseOverCube())
             {
                 dragStartPos = mousePos;
@@ -53,7 +53,7 @@ public class PlayerCube : MonoBehaviour
                 }
                 TrajectoryLine.EndLine();
             }
-        }
+        //}
     }
     private static void PushCube(float dragLength)
     {

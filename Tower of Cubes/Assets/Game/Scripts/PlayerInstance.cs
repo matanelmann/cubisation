@@ -32,18 +32,8 @@ public class PlayerInstance : MonoBehaviour
     {
         if (cubeOutOfBounds())
         {
-            if(PlayerCube.popupIndex == 1) {
-                
-                //text to strong
-                Tower.DestroyTower();
-                PlayerCube.DestroyPlayer();
-                Tower.CreateTower();
-                PlayerCube.CreatePlayerCube();
-
-            }
-            // Destroy(gameObject);
-            // Debug.Log("cubeOutOfBounds");
-            // GameHandler.GameOver();
+            CodeMonkey.CMDebug.TextPopup("Too strong, try again", new Vector3(GameSettings.LEFT_EDGE, -20, 0), 3f, 40, Color.green);
+            GameHandler.RestartLevel();
         }
     }
     private bool cubeOutOfBounds()
@@ -69,19 +59,13 @@ public class PlayerInstance : MonoBehaviour
         if (Tower.newTopCube && cubeOnTower())
         {
             Tower.newTopCube = false;
-            //text grat job try again
+            CodeMonkey.CMDebug.TextPopup("Great job! One more time!", new Vector3(GameSettings.LEFT_EDGE, 0, 0), 3f, 40, Color.green);
             Platform.MovePlatform();
         }
         else
         {
-            
-            //text to gentle
-            Tower.DestroyTower();
-            PlayerCube.DestroyPlayer();
-            Tower.CreateTower();
-            PlayerCube.CreatePlayerCube();
-            // Debug.Log("CallMovePlatform");
-            // GameHandler.GameOver();
+            CodeMonkey.CMDebug.TextPopup("Too gentle, try again", new Vector3(GameSettings.LEFT_EDGE, -20, 0), 3f, 40, Color.green);
+            GameHandler.RestartLevel();
         }
     }
     private bool SideCollision(ContactPoint2D[] contacts)
