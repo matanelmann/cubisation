@@ -60,4 +60,9 @@ public class Platform : MonoBehaviour
             nextScale = new Vector3(1 + (Tower.getTopCube()[1].cubeTransform.position.x - GameSettings.LEFT_EDGE - GameSettings.PLATFORM_LENGTH) / GameSettings.PLATFORM_LENGTH, 1);
         }
     }
+
+    public static void DestroyPlatform()
+    {
+        Destroy(pt.gameObject);
+    }
 }

@@ -32,8 +32,9 @@ public class PlayerInstance : MonoBehaviour
     {
         if (cubeOutOfBounds())
         {
-            CodeMonkey.CMDebug.TextPopup("Too strong, try again", new Vector3(GameSettings.LEFT_EDGE, -20, 0), 3f, 40, Color.green);
-            GameHandler.RestartLevel();
+            //CodeMonkey.CMDebug.TextPopup("Too strong, try again", new Vector3(GameSettings.LEFT_EDGE, -20, 0), 3f, 40, Color.green);
+            //GameHandler.RestartLevel();
+            
         }
     }
     private bool cubeOutOfBounds()
@@ -59,13 +60,13 @@ public class PlayerInstance : MonoBehaviour
         if (Tower.newTopCube && cubeOnTower())
         {
             Tower.newTopCube = false;
-            CodeMonkey.CMDebug.TextPopup("Great job! One more time!", new Vector3(GameSettings.LEFT_EDGE, 0, 0), 3f, 40, Color.green);
+            //CodeMonkey.CMDebug.TextPopup("Great job! One more time!", new Vector3(GameSettings.LEFT_EDGE, 0, 0), 3f, 40, Color.green);
             Platform.MovePlatform();
         }
         else
         {
-            CodeMonkey.CMDebug.TextPopup("Too gentle, try again", new Vector3(GameSettings.LEFT_EDGE, -20, 0), 3f, 40, Color.green);
-            GameHandler.RestartLevel();
+            //CodeMonkey.CMDebug.TextPopup("Too gentle, try again", new Vector3(GameSettings.LEFT_EDGE, -20, 0), 3f, 40, Color.green);
+            //GameHandler.RestartLevel();
         }
     }
     private bool SideCollision(ContactPoint2D[] contacts)
