@@ -34,6 +34,8 @@ public class PlayerInstance : MonoBehaviour
         {
             //CodeMonkey.CMDebug.TextPopup("Too strong, try again", new Vector3(GameSettings.LEFT_EDGE, -20, 0), 3f, 40, Color.green);
             //GameHandler.RestartLevel();
+            Destroy(gameObject);
+            GameHandler.GameOver();
             
         }
     }
