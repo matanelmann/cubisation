@@ -17,7 +17,7 @@ public class Tower : MonoBehaviour
         float scale, length;
         for (int i = 0; i < GameSettings.TOWER_HEIGHT; i++)
         {
-            scale = GameSettings.CUBE_SCALE * Mathf.Pow(0.85f, i);
+            scale = GameSettings.CUBE_SCALE * Mathf.Pow(0.9f, i);
             length = scale * 5.12f;
             CreateCube((GameSettings.TOWER_X - length / 2), GetTowerHeight(), scale);
         }
