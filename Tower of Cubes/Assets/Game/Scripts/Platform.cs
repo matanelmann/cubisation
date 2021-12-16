@@ -12,8 +12,8 @@ public class Platform : MonoBehaviour
     public static void CreatePlatform()
     {
         pt = Instantiate(GameAssets.GetInstance().platform, GameSettings.GameTransform);
-        pt.position = new Vector3(GameSettings.LEFT_EDGE, Tower.GetTowerHeight() - Tower.getTopCube()[0].length);
-        pt.localScale = new Vector3(1 + (Tower.getTopCube()[1].cubeTransform.position.x - GameSettings.LEFT_EDGE - GameSettings.PLATFORM_LENGTH) / GameSettings.PLATFORM_LENGTH, 1);
+        pt.position = new Vector3(GameSettings.LEFT_EDGE, Tower.GetTowerHeight() - Tower.getTopCubes()[0].length);
+        pt.localScale = new Vector3(1 + (Tower.getTopCubes()[1].cubeTransform.position.x - GameSettings.LEFT_EDGE - GameSettings.PLATFORM_LENGTH) / GameSettings.PLATFORM_LENGTH, 1);
     }
 
     public static float getPlatformY()
@@ -56,8 +56,8 @@ public class Platform : MonoBehaviour
         }
         else
         {
-            nextPosition = new Vector3(GameSettings.LEFT_EDGE, pt.position.y - Tower.getTopCube()[0].length);
-            nextScale = new Vector3(1 + (Tower.getTopCube()[1].cubeTransform.position.x - GameSettings.LEFT_EDGE - GameSettings.PLATFORM_LENGTH) / GameSettings.PLATFORM_LENGTH, 1);
+            nextPosition = new Vector3(GameSettings.LEFT_EDGE, pt.position.y - Tower.getTopCubes()[0].length);
+            nextScale = new Vector3(1 + (Tower.getTopCubes()[1].cubeTransform.position.x - GameSettings.LEFT_EDGE - GameSettings.PLATFORM_LENGTH) / GameSettings.PLATFORM_LENGTH, 1);
         }
     }
 

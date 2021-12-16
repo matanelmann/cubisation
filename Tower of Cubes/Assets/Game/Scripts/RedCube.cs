@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class RedCube : MonoBehaviour
 {
+    [HideInInspector] public CubeClass.Cube cubeObj;
     Rigidbody2D cubeRb;
-    //public static bool collided = false;
     void Start()
     {
         cubeRb = gameObject.GetComponent<Rigidbody2D>();
@@ -17,6 +17,7 @@ public class RedCube : MonoBehaviour
     {
         if (cubeOutOfBounds())
         {
+            
             Destroy(gameObject);
         }
     }

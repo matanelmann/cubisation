@@ -5,13 +5,16 @@ using UnityEngine;
 public class PlayerInstance : MonoBehaviour
 {
     AudioSource sound;
-    public static bool allowSound = true;
+    [HideInInspector] public CubeClass.Cube cubeObj;
+    public static bool allowSound;
     public static float initial_Y;
-    private static ContactPoint2D[] contacts = new ContactPoint2D[10];
+    private static ContactPoint2D[] contacts;
     private static float length;
 
     private void Start()
     {
+        allowSound = true;
+        contacts = new ContactPoint2D[10];
         length = transform.localScale.x * 5.12f;
         initial_Y = transform.position.y;
         sound = gameObject.GetComponent<AudioSource>();
@@ -19,15 +22,15 @@ public class PlayerInstance : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D col)
     {
         col.GetContacts(contacts);
-        if (!Tower.TowerEmpty() && allowSound && col.collider.transform == Tower.getTopCube()[0].cubeTransform && SideCollision(contacts)) // If the PlayerCube hit the top RedCube
+        if (!Tower.TowerEmpty() && allowSound && col.collider.transform == Tower.getTopCubes()[0].cubeTransform && SideCollision(contacts)) // If the PlayerCube hit the top RedCube
         {
             sound.Play();
             allowSound = false;
-            Invoke("CallMovePlatform", 2f);
+            Invoke("CallCheckPhase", 2f);
         }
     }
 
-    
+
     void Update()
     {
         if (cubeOutOfBounds())
@@ -36,7 +39,7 @@ public class PlayerInstance : MonoBehaviour
             //GameHandler.RestartLevel();
             Destroy(gameObject);
             GameHandler.GameOver();
-            
+
         }
     }
     private bool cubeOutOfBounds()
@@ -57,19 +60,9 @@ public class PlayerInstance : MonoBehaviour
         return true;
     }
 
-    private void CallMovePlatform()
+    private void CallCheckPhase()
     {
-        if (Tower.newTopCube && cubeOnTower())
-        {
-            Tower.newTopCube = false;
-            //CodeMonkey.CMDebug.TextPopup("Great job! One more time!", new Vector3(GameSettings.LEFT_EDGE, 0, 0), 3f, 40, Color.green);
-            Platform.MovePlatform();
-        }
-        else
-        {
-            //CodeMonkey.CMDebug.TextPopup("Too gentle, try again", new Vector3(GameSettings.LEFT_EDGE, -20, 0), 3f, 40, Color.green);
-            //GameHandler.RestartLevel();
-        }
+        GameHandler.CheckPhase();
     }
     private bool SideCollision(ContactPoint2D[] contacts)
     {
@@ -78,9 +71,10 @@ public class PlayerInstance : MonoBehaviour
             if (cp.point.y >= transform.position.y + 0.1 * length)
             {
                 return true;
-
             }
         }
         return false;
     }
+
+    
 }

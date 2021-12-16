@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class RestartButton : MonoBehaviour
 {
-    
+
     private void Start()
     {
         transform.position = new Vector3(GameSettings.LEFT_EDGE + 2.56f, transform.position.y, transform.position.z);

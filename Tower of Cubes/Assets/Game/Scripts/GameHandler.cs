@@ -5,9 +5,10 @@ using UnityEngine;
 public class GameHandler : MonoBehaviour
 {
     static AudioSource sound;
-    public static bool Play = true;
+    public static bool Play;
     void Start()
     {
+        Play = true;
         Tower.CreateTower();
         Platform.CreatePlatform();
         PlayerCube.CreatePlayerCube();
@@ -37,5 +38,18 @@ public class GameHandler : MonoBehaviour
         sound.Play();
         Play = false;
         Debug.Log("Level Passed");
+    }
+
+    public static void CheckPhase()
+    {
+        if (Tower.newTopCube)
+        {
+            Tower.newTopCube = false;
+            Platform.MovePlatform();
+        }
+        else
+        {
+            GameHandler.GameOver();
+        }
     }
 }
