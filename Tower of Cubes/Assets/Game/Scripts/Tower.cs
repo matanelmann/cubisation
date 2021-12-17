@@ -12,7 +12,7 @@ public class Tower : MonoBehaviour
         Instance = this;
     }
 
-    public void init()
+    public void Init()
     {
         newTopCube = false;
         RedCubesList = new List<CubeClass.Cube>();
@@ -74,7 +74,7 @@ public class Tower : MonoBehaviour
         {
             RedCubesList.RemoveAt(RedCubesList.Count - 1);
             newTopCube = true;
-            PlayerInstance.instance.allowSound = true;
+            PlayerInstance.Instance.allowSound = true;
             if (RedCubesList.Count == 0)
             {
                 GameHandler.Instance.LevelPassed();

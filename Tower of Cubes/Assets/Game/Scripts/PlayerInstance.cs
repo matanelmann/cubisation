@@ -12,10 +12,10 @@ public class PlayerInstance : MonoBehaviour
     private ContactPoint2D[] contacts;
     private float length;
 
-    public static PlayerInstance instance;
+    public static PlayerInstance Instance;
     private void Awake()
     {
-        instance = this;
+        Instance = this;
     }
     public void init()
     {

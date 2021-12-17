@@ -9,13 +9,13 @@ public class PlayerCube : MonoBehaviour
     public Rigidbody2D cubeRb;
     private Vector3 dragStartPos;
     private Vector3 dragEndPos;
-    public static PlayerCube instance;
+    public static PlayerCube Instance;
     private void Awake()
     {
-        instance = this;
+        Instance = this;
     }
 
-    public void init()
+    public void Init()
     {
           BlueCubesList = new List<CubeClass.Cube>();
     }

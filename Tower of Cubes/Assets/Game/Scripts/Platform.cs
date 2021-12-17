@@ -38,7 +38,7 @@ public class Platform : MonoBehaviour
             if (pt.position.Equals(nextPosition)) // Platform finished moving to the next position
             {
                 moveToNextPosition = false;
-                PlayerCube.instance.CreatePlayerCube(); // Spawn a new PlayerCube
+                PlayerCube.Instance.CreatePlayerCube(); // Spawn a new PlayerCube
             }
             else // Continue moving the platform
             {

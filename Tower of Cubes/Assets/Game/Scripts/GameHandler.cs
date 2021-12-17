@@ -30,24 +30,25 @@ public class GameHandler : MonoBehaviour
     //     sound = gameObject.GetComponent<AudioSource>();
     // }
     private void Init() {
+        Debug.Log("Hey");
         active = false;
-        Tower.Instance.init();
-        PlayerCube.instance.init();
-        MainMenu.Display();
+        Tower.Instance.Init();
+        PlayerCube.Instance.Init();
+        //MainMenu.Display();
     }
 
     public void StartGame()
     {
         Tower.Instance.CreateTower();
         Platform.Instance.CreatePlatform();
-        PlayerCube.instance.CreatePlayerCube();
+        PlayerCube.Instance.CreatePlayerCube();
     }
 
     void Update()
     {
         if (active)
         {
-            PlayerCube.instance.CheckInput();
+            PlayerCube.Instance.CheckInput();
             Tower.Instance.UpdateTower();
         }
     }
