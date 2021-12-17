@@ -5,13 +5,19 @@ using UnityEngine;
 public class PlayerInstance : MonoBehaviour
 {
     AudioSource sound;
-    [HideInInspector] public CubeClass.Cube cubeObj;
-    public static bool allowSound;
-    public static float initial_Y;
-    private static ContactPoint2D[] contacts;
-    private static float length;
+    // [HideInInspector] public CubeClass.Cube cubeObj;
+    public CubeClass.Cube cube = CubeClass.Cube.instance;
+    public bool allowSound;
+    public float initial_Y;
+    private ContactPoint2D[] contacts;
+    private float length;
 
-    private void Start()
+    public static PlayerInstance instance;
+    private void Awake()
+    {
+        instance = this;
+    }
+    public void init()
     {
         allowSound = true;
         contacts = new ContactPoint2D[10];
@@ -22,7 +28,7 @@ public class PlayerInstance : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D col)
     {
         col.GetContacts(contacts);
-        if (!Tower.TowerEmpty() && allowSound && col.collider.transform == Tower.getTopCubes()[0].cubeTransform && SideCollision(contacts)) // If the PlayerCube hit the top RedCube
+        if (!Tower.instance.TowerEmpty() && allowSound && col.collider.transform == Tower.instance.getTopCubes()[0].cubeTransform && SideCollision(contacts)) // If the PlayerCube hit the top RedCube
         {
             sound.Play();
             allowSound = false;

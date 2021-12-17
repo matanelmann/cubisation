@@ -4,9 +4,15 @@ using UnityEngine;
 
 public class RedCube : MonoBehaviour
 {
-    [HideInInspector] public CubeClass.Cube cubeObj;
+    // [HideInInspector] public CubeClass.Cube cubeObj;
+    public CubeClass.Cube cube = CubeClass.Cube.instance;
+    public static RedCube instance;
+    private void Awake()
+    {
+        instance = this;
+    }
     Rigidbody2D cubeRb;
-    void Start()
+    public void init()
     {
         cubeRb = gameObject.GetComponent<Rigidbody2D>();
         cubeRb.gravityScale = GameSettings.CUBE_GRAVITY;

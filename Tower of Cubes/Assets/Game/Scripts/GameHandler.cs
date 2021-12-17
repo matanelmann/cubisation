@@ -6,13 +6,16 @@ public class GameHandler : MonoBehaviour
 {
     static AudioSource sound;
     public static bool Play;
-    void Start()
-    {
-        Play = true;
-        Tower.CreateTower();
-        Platform.CreatePlatform();
-        PlayerCube.CreatePlayerCube();
-        sound = gameObject.GetComponent<AudioSource>();
+    // void Start()
+    // {
+    //     Play = true;
+    //     Tower.CreateTower();
+    //     Platform.CreatePlatform();
+    //     PlayerCube.CreatePlayerCube();
+    //     sound = gameObject.GetComponent<AudioSource>();
+    // }
+    public void init() {
+
     }
 
     // Update is called once per frame
@@ -20,8 +23,8 @@ public class GameHandler : MonoBehaviour
     {
         if (Play)
         {
-            PlayerCube.CheckInput();
-            Tower.UpdateTower();
+            PlayerCube.instance.CheckInput();
+            Tower.instance.UpdateTower();
         }
     }
 
@@ -42,10 +45,10 @@ public class GameHandler : MonoBehaviour
 
     public static void CheckPhase()
     {
-        if (Tower.newTopCube)
+        if (Tower.instance.newTopCube)
         {
-            Tower.newTopCube = false;
-            Platform.MovePlatform();
+            Tower.instance.newTopCube = false;
+            Platform.instance.MovePlatform();
         }
         else
         {

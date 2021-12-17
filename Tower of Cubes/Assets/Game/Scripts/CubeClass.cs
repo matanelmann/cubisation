@@ -4,8 +4,14 @@ using UnityEngine;
 
 public class CubeClass : MonoBehaviour
 {
+    
     public class Cube
     {
+        public static CubeClass.Cube instance;
+        private void Awake()
+        {
+            instance = this;
+        }
         public Transform cubeTransform;
         public float length;
         public float scale;

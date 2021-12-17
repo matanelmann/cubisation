@@ -4,15 +4,20 @@ using UnityEngine;
 
 public class Tower : MonoBehaviour
 {
-    [HideInInspector] public static List<CubeClass.Cube> RedCubesList;
-    public static bool newTopCube;
+    [HideInInspector] public List<CubeClass.Cube> RedCubesList;
+    public bool newTopCube;
+    public static Tower instance;
+    private void Awake()
+    {
+        instance = this;
+    }
 
-    private void Start()
+    public void init()
     {
         newTopCube = false;
         RedCubesList = new List<CubeClass.Cube>();
     }
-    public static void CreateTower()
+    public void CreateTower()
     {
         float scale, length;
         for (int i = 0; i < GameSettings.TOWER_HEIGHT; i++)
@@ -23,7 +28,7 @@ public class Tower : MonoBehaviour
         }
     }
 
-    public static float GetTowerHeight()
+    public float GetTowerHeight()
     {
         float result = 0;
         foreach (CubeClass.Cube cube in RedCubesList)
@@ -33,16 +38,16 @@ public class Tower : MonoBehaviour
         return GameSettings.GROUND_Y + Mathf.Abs(result * 5.12f);
     }
 
-    private static void CreateCube(float xPosition, float yPosition, float cubeScale)
+    private void CreateCube(float xPosition, float yPosition, float cubeScale)
     {
-        Transform cubeTransform = Instantiate(GameAssets.GetInstance().redCube, GameSettings.GameTransform);
+        Transform cubeTransform = Instantiate(GameAssets.instance.redCube, GameSettings.GameTransform);
         cubeTransform.position = new Vector3(xPosition, yPosition);
         cubeTransform.localScale = new Vector3(cubeScale, cubeScale, cubeScale);
         CubeClass.Cube cube = new CubeClass.Cube(cubeTransform);
         RedCubesList.Add(cube);
     }
 
-    public static CubeClass.Cube[] getTopCubes()
+    public CubeClass.Cube[] getTopCubes()
     {
         CubeClass.Cube[] cubes = new CubeClass.Cube[2];
         cubes[0] = RedCubesList[RedCubesList.Count - 1];
@@ -53,23 +58,23 @@ public class Tower : MonoBehaviour
         return cubes;
     }
 
-    public static CubeClass.Cube getBottomCube()
+    public CubeClass.Cube getBottomCube()
     {
         return RedCubesList[0];
     }
 
-    public static bool TowerEmpty()
+    public bool TowerEmpty()
     {
         return RedCubesList.Count <= 1;
     }
 
-    public static void UpdateTower()
+    public void UpdateTower()
     {
         if (!TowerEmpty() && getTopCubes()[0].cubeTransform.position.x > getTopCubes()[1].cubeTransform.position.x + getTopCubes()[1].length)
         {
             RedCubesList.RemoveAt(RedCubesList.Count - 1);
             newTopCube = true;
-            PlayerInstance.allowSound = true;
+            PlayerInstance.instance.allowSound = true;
             if (RedCubesList.Count == 0)
             {
                 GameHandler.LevelPassed();

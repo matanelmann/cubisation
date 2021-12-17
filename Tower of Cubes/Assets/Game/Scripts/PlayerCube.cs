@@ -5,28 +5,33 @@ using UnityEngine;
 public class PlayerCube : MonoBehaviour
 {
     [HideInInspector] public static List<CubeClass.Cube> BlueCubesList;
-    public static Transform playerCube;
-    public static Rigidbody2D cubeRb;
-    private static Vector3 dragStartPos;
-    private static Vector3 dragEndPos;
-
-    private void Start()
+     public Transform playerCube;
+    public Rigidbody2D cubeRb;
+    private Vector3 dragStartPos;
+    private Vector3 dragEndPos;
+    public static PlayerCube instance;
+    private void Awake()
     {
-        BlueCubesList = new List<CubeClass.Cube>();
+        instance = this;
     }
-    public static void CreatePlayerCube()
+
+    public void init()
     {
-        playerCube = Instantiate(GameAssets.GetInstance().blueCube, GameSettings.GameTransform);
-        playerCube.position = new Vector3(GameSettings.LEFT_EDGE / 2f, Platform.getPlatformY() + GameSettings.CUBE_LENGTH / 2);
-        playerCube.localScale = Tower.getTopCubes()[0].cubeTransform.localScale;
+          BlueCubesList = new List<CubeClass.Cube>();
+    }
+    public void CreatePlayerCube()
+    {
+        playerCube = Instantiate(GameAssets.instance.blueCube, GameSettings.GameTransform);
+        playerCube.position = new Vector3(GameSettings.LEFT_EDGE / 2f, Platform.instance.getPlatformY() + GameSettings.CUBE_LENGTH / 2);
+        playerCube.localScale = Tower.instance.getTopCubes()[0].cubeTransform.localScale;
         cubeRb = playerCube.GetComponent<Rigidbody2D>();
         cubeRb.gravityScale = GameSettings.CUBE_GRAVITY;
         cubeRb.mass = GameSettings.CUBE_MASS;
         CubeClass.Cube newCube = new CubeClass.Cube(playerCube);
-        playerCube.gameObject.GetComponent<PlayerInstance>().cubeObj = newCube;
+        playerCube.gameObject.GetComponent<PlayerInstance>().cube = newCube;
         BlueCubesList.Add(newCube);
     }
-    public static void CheckInput()
+    public void CheckInput()
     {
 
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0, 0, 1);
@@ -37,7 +42,7 @@ public class PlayerCube : MonoBehaviour
 
         if (Input.GetMouseButton(0))
         {
-            TrajectoryLine.RenderLine(dragStartPos, mousePos);
+            TrajectoryLine.instance.RenderLine(dragStartPos, mousePos);
         }
 
         if (Input.GetMouseButtonUp(0))
@@ -48,15 +53,15 @@ public class PlayerCube : MonoBehaviour
             {
                 PushCube(dragLength);
             }
-            TrajectoryLine.EndLine();
+            TrajectoryLine.instance.EndLine();
         }
     }
-    private static void PushCube(float dragLength)
+    private void PushCube(float dragLength)
     {
         cubeRb.AddForce(Vector2.right * GameSettings.CUBE_FORCE * dragLength);
     }
 
-    private static bool MouseOverCube()
+    private bool MouseOverCube()
     {
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         float mouseX = mousePos.x, mouseY = mousePos.y;
@@ -67,7 +72,7 @@ public class PlayerCube : MonoBehaviour
         return false;
     }
 
-    public static void DestroyPlayer()
+    public void DestroyPlayer()
     {
         Destroy(playerCube.gameObject);
     }

@@ -4,24 +4,29 @@ using UnityEngine;
 
 public class Platform : MonoBehaviour
 {
-    static Vector3 nextPosition = Vector3.zero;
-    static Vector3 nextScale;
-    private static bool moveToNextPosition = false;
-    static Transform pt;
+    Vector3 nextPosition = Vector3.zero;
+    Vector3 nextScale; 
+    private bool moveToNextPosition = false; 
+    Transform pt; 
 
-    public static void CreatePlatform()
+    public static Platform instance;
+    private void Awake()
     {
-        pt = Instantiate(GameAssets.GetInstance().platform, GameSettings.GameTransform);
-        pt.position = new Vector3(GameSettings.LEFT_EDGE, Tower.GetTowerHeight() - Tower.getTopCubes()[0].length);
-        pt.localScale = new Vector3(1 + (Tower.getTopCubes()[1].cubeTransform.position.x - GameSettings.LEFT_EDGE - GameSettings.PLATFORM_LENGTH) / GameSettings.PLATFORM_LENGTH, 1);
+        instance = this;
+    }
+    public void CreatePlatform()
+    {
+        pt = Instantiate(GameAssets.instance.platform, GameSettings.GameTransform);
+        pt.position = new Vector3(GameSettings.LEFT_EDGE, Tower.instance.GetTowerHeight() - Tower.instance.getTopCubes()[0].length);
+        pt.localScale = new Vector3(1 + (Tower.instance.getTopCubes()[1].cubeTransform.position.x - GameSettings.LEFT_EDGE - GameSettings.PLATFORM_LENGTH) / GameSettings.PLATFORM_LENGTH, 1);
     }
 
-    public static float getPlatformY()
+    public float getPlatformY()
     {
         return pt.position.y;
     }
 
-    public static void MovePlatform()
+    public void MovePlatform()
     {
         setNextPlatformPosition();
         moveToNextPosition = true;
@@ -34,7 +39,7 @@ public class Platform : MonoBehaviour
             if (pt.position.Equals(nextPosition)) // Platform finished moving to the next position
             {
                 moveToNextPosition = false;
-                PlayerCube.CreatePlayerCube(); // Spawn a new PlayerCube
+                PlayerCube.instance.CreatePlayerCube(); // Spawn a new PlayerCube
             }
             else // Continue moving the platform
             {
@@ -48,20 +53,20 @@ public class Platform : MonoBehaviour
         }
     }
 
-    public static void setNextPlatformPosition()
+    public void setNextPlatformPosition()
     {
-        if (Tower.TowerEmpty())
+        if (Tower.instance.TowerEmpty())
         {
             nextPosition = new Vector3(GameSettings.LEFT_EDGE, GameSettings.BOTTOM_EDGE);
         }
         else
         {
-            nextPosition = new Vector3(GameSettings.LEFT_EDGE, pt.position.y - Tower.getTopCubes()[0].length);
-            nextScale = new Vector3(1 + (Tower.getTopCubes()[1].cubeTransform.position.x - GameSettings.LEFT_EDGE - GameSettings.PLATFORM_LENGTH) / GameSettings.PLATFORM_LENGTH, 1);
+            nextPosition = new Vector3(GameSettings.LEFT_EDGE, pt.position.y - Tower.instance.getTopCubes()[0].length);
+            nextScale = new Vector3(1 + (Tower.instance.getTopCubes()[1].cubeTransform.position.x - GameSettings.LEFT_EDGE - GameSettings.PLATFORM_LENGTH) / GameSettings.PLATFORM_LENGTH, 1);
         }
     }
 
-    public static void DestroyPlatform()
+    public void DestroyPlatform()
     {
         Destroy(pt.gameObject);
     }
