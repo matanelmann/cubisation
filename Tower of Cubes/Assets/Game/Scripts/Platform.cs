@@ -7,18 +7,17 @@ public class Platform : MonoBehaviour
     Vector3 nextPosition = Vector3.zero;
     Vector3 nextScale; 
     private bool moveToNextPosition = false; 
-    Transform pt; 
-
-    public static Platform instance;
+    Transform pt;
+    public static Platform Instance;
     private void Awake()
     {
-        instance = this;
+        Instance = this;
     }
     public void CreatePlatform()
     {
         pt = Instantiate(GameAssets.instance.platform, GameSettings.GameTransform);
-        pt.position = new Vector3(GameSettings.LEFT_EDGE, Tower.instance.GetTowerHeight() - Tower.instance.getTopCubes()[0].length);
-        pt.localScale = new Vector3(1 + (Tower.instance.getTopCubes()[1].cubeTransform.position.x - GameSettings.LEFT_EDGE - GameSettings.PLATFORM_LENGTH) / GameSettings.PLATFORM_LENGTH, 1);
+        pt.position = new Vector3(GameSettings.LEFT_EDGE, Tower.Instance.GetTowerHeight() - Tower.Instance.getTopCubes()[0].length);
+        pt.localScale = new Vector3(1 + (Tower.Instance.getTopCubes()[1].cubeTransform.position.x - GameSettings.LEFT_EDGE - GameSettings.PLATFORM_LENGTH) / GameSettings.PLATFORM_LENGTH, 1);
     }
 
     public float getPlatformY()
@@ -34,7 +33,7 @@ public class Platform : MonoBehaviour
 
     void Update()
     {
-        if (moveToNextPosition && GameHandler.Play)
+        if (moveToNextPosition && GameHandler.Instance.isGameActive())
         {
             if (pt.position.Equals(nextPosition)) // Platform finished moving to the next position
             {
@@ -55,14 +54,14 @@ public class Platform : MonoBehaviour
 
     public void setNextPlatformPosition()
     {
-        if (Tower.instance.TowerEmpty())
+        if (Tower.Instance.TowerEmpty())
         {
             nextPosition = new Vector3(GameSettings.LEFT_EDGE, GameSettings.BOTTOM_EDGE);
         }
         else
         {
-            nextPosition = new Vector3(GameSettings.LEFT_EDGE, pt.position.y - Tower.instance.getTopCubes()[0].length);
-            nextScale = new Vector3(1 + (Tower.instance.getTopCubes()[1].cubeTransform.position.x - GameSettings.LEFT_EDGE - GameSettings.PLATFORM_LENGTH) / GameSettings.PLATFORM_LENGTH, 1);
+            nextPosition = new Vector3(GameSettings.LEFT_EDGE, pt.position.y - Tower.Instance.getTopCubes()[0].length);
+            nextScale = new Vector3(1 + (Tower.Instance.getTopCubes()[1].cubeTransform.position.x - GameSettings.LEFT_EDGE - GameSettings.PLATFORM_LENGTH) / GameSettings.PLATFORM_LENGTH, 1);
         }
     }
 

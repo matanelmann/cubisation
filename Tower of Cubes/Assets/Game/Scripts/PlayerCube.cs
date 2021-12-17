@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerCube : MonoBehaviour
 {
     [HideInInspector] public static List<CubeClass.Cube> BlueCubesList;
-     public Transform playerCube;
+    public Transform playerCube;
     public Rigidbody2D cubeRb;
     private Vector3 dragStartPos;
     private Vector3 dragEndPos;
@@ -22,8 +22,8 @@ public class PlayerCube : MonoBehaviour
     public void CreatePlayerCube()
     {
         playerCube = Instantiate(GameAssets.instance.blueCube, GameSettings.GameTransform);
-        playerCube.position = new Vector3(GameSettings.LEFT_EDGE / 2f, Platform.instance.getPlatformY() + GameSettings.CUBE_LENGTH / 2);
-        playerCube.localScale = Tower.instance.getTopCubes()[0].cubeTransform.localScale;
+        playerCube.position = new Vector3(GameSettings.LEFT_EDGE / 2f, Platform.Instance.getPlatformY() + GameSettings.CUBE_LENGTH / 2);
+        playerCube.localScale = Tower.Instance.getTopCubes()[0].cubeTransform.localScale;
         cubeRb = playerCube.GetComponent<Rigidbody2D>();
         cubeRb.gravityScale = GameSettings.CUBE_GRAVITY;
         cubeRb.mass = GameSettings.CUBE_MASS;

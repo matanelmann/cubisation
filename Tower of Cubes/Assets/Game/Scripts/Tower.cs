@@ -6,10 +6,10 @@ public class Tower : MonoBehaviour
 {
     [HideInInspector] public List<CubeClass.Cube> RedCubesList;
     public bool newTopCube;
-    public static Tower instance;
+    public static Tower Instance;
     private void Awake()
     {
-        instance = this;
+        Instance = this;
     }
 
     public void init()
@@ -77,7 +77,7 @@ public class Tower : MonoBehaviour
             PlayerInstance.instance.allowSound = true;
             if (RedCubesList.Count == 0)
             {
-                GameHandler.LevelPassed();
+                GameHandler.Instance.LevelPassed();
             }
         }
     }

@@ -4,8 +4,23 @@ using UnityEngine;
 
 public class GameHandler : MonoBehaviour
 {
-    static AudioSource sound;
-    public static bool Play;
+    public static GameHandler Instance;
+    private bool active;
+
+    private void Awake()
+    {
+        Instance = this;
+        Init();
+    }
+
+    // Temporary:
+    private void Start()
+    {
+        StartGame();
+    }
+
+
+
     // void Start()
     // {
     //     Play = true;
@@ -14,45 +29,58 @@ public class GameHandler : MonoBehaviour
     //     PlayerCube.CreatePlayerCube();
     //     sound = gameObject.GetComponent<AudioSource>();
     // }
-    public void init() {
-
+    private void Init() {
+        active = false;
+        Tower.Instance.init();
+        PlayerCube.instance.init();
+        MainMenu.Display();
     }
 
-    // Update is called once per frame
+    public void StartGame()
+    {
+        Tower.Instance.CreateTower();
+        Platform.Instance.CreatePlatform();
+        PlayerCube.instance.CreatePlayerCube();
+    }
+
     void Update()
     {
-        if (Play)
+        if (active)
         {
             PlayerCube.instance.CheckInput();
-            Tower.instance.UpdateTower();
+            Tower.Instance.UpdateTower();
         }
     }
 
-    public static void GameOver()
+    public void GameOver()
     {
         // To-do
-        Play = false;
+        active = false;
         Debug.Log("Game Over");
     }
 
-    public static void LevelPassed()
+    public void LevelPassed()
     {
         // To-do
-        sound.Play();
-        Play = false;
+        active = false;
         Debug.Log("Level Passed");
     }
 
-    public static void CheckPhase()
+    public void CheckPhase()
     {
-        if (Tower.instance.newTopCube)
+        if (Tower.Instance.newTopCube)
         {
-            Tower.instance.newTopCube = false;
-            Platform.instance.MovePlatform();
+            Tower.Instance.newTopCube = false;
+            Platform.Instance.MovePlatform();
         }
         else
         {
-            GameHandler.GameOver();
+            GameOver();
         }
+    }
+
+    public bool isGameActive()
+    {
+        return active;
     }
 }
