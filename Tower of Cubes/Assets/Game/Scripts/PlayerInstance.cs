@@ -27,12 +27,15 @@ public class PlayerInstance : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D col)
     {
-        col.GetContacts(contacts);
-        if (!Tower.Instance.TowerEmpty() && allowSound && col.collider.transform == Tower.Instance.getTopCubes()[0].cubeTransform && SideCollision(contacts)) // If the PlayerCube hit the top RedCube
+        if (GameHandler.Instance.isGameActive())
         {
-            sound.Play();
-            allowSound = false;
-            Invoke("CallCheckPhase", 2f);
+            col.GetContacts(contacts);
+            if (!Tower.Instance.TowerEmpty() && allowSound && col.collider.transform == Tower.Instance.getTopCubes()[0].cubeTransform && SideCollision(contacts)) // If the PlayerCube hit the top RedCube
+            {
+                sound.Play();
+                allowSound = false;
+                Invoke("CallCheckPhase", 2f);
+            }
         }
     }
 
@@ -41,8 +44,6 @@ public class PlayerInstance : MonoBehaviour
     {
         if (cubeOutOfBounds())
         {
-            //CodeMonkey.CMDebug.TextPopup("Too strong, try again", new Vector3(GameSettings.LEFT_EDGE, -20, 0), 3f, 40, Color.green);
-            //GameHandler.RestartLevel();
             Destroy(gameObject);
             GameHandler.Instance.GameOver();
 
