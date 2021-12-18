@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerInstance : MonoBehaviour
 {
     AudioSource sound;
-    // [HideInInspector] public CubeClass.Cube cubeObj;
+    // [HideInInspector] public CubeClass.Cube cubeObjasd;
     public CubeClass.Cube cube = CubeClass.Cube.instance;
     public bool allowSound;
     public float initial_Y;
