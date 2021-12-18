@@ -5,14 +5,12 @@ using UnityEngine;
 [RequireComponent(typeof(LineRenderer))]
 public class TrajectoryLine : MonoBehaviour
 {
-    public static TrajectoryLine instance;
-    public LineRenderer lr;
-    public void Awake()
+    public static LineRenderer lr;
+    private void Awake()
     {
-        instance = this;
-        lr = gameObject.GetComponent<LineRenderer>();
+        lr = GameConfig.GameTransform.GetComponent<LineRenderer>();
     }
-    public void RenderLine(Vector3 startPoint, Vector3 endPoint)
+    public static void RenderLine(Vector3 startPoint, Vector3 endPoint)
     {
         endPoint.y = startPoint.y;
         lr.positionCount = 2;
@@ -21,7 +19,7 @@ public class TrajectoryLine : MonoBehaviour
         points[1] = endPoint;
         lr.SetPositions(points);
     }
-    public void EndLine()
+    public static void EndLine()
     {
         lr.positionCount = 0;
     }

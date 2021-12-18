@@ -5,6 +5,7 @@ using UnityEngine;
 public class GameHandler : MonoBehaviour
 {
     public static GameHandler Instance;
+    public InputManager input;
     private bool active;
 
     private void Awake()
@@ -16,7 +17,12 @@ public class GameHandler : MonoBehaviour
     // Temporary:
     private void Start()
     {
-        StartGame();
+        StartGame(); // Should later on be called from the main menu at first!
+    }
+
+    public static GameHandler GetInstance()
+    {
+        return Instance;
     }
 
 
@@ -30,27 +36,32 @@ public class GameHandler : MonoBehaviour
     //     sound = gameObject.GetComponent<AudioSource>();
     // }
     private void Init() {
-        Debug.Log("Hey");
         active = false;
-        Tower.Instance.Init();
-        PlayerCube.Instance.Init();
+        CubesController.GetInstance().Init();
         //MainMenu.Display();
     }
 
     public void StartGame()
     {
-        Tower.Instance.CreateTower();
-        Platform.Instance.CreatePlatform();
-        PlayerCube.Instance.CreatePlayerCube();
+        active = true;
+        Debug.Log("Calling StartLevel");
+        Level.GetInstance().StartLevel(0);
     }
 
     void Update()
     {
         if (active)
         {
-            PlayerCube.Instance.CheckInput();
-            Tower.Instance.UpdateTower();
+            input.Check();
+            //Tower.Instance.UpdateTower();
         }
+    }
+
+    public void Restart()
+    {
+        active = false;
+        DestroyObjects();
+        StartGame();
     }
 
     public void GameOver()
@@ -67,7 +78,7 @@ public class GameHandler : MonoBehaviour
         Debug.Log("Level Passed");
     }
 
-    public void CheckPhase()
+    /*public void CheckPhase()
     {
         if (Tower.Instance.newTopCube)
         {
@@ -78,10 +89,16 @@ public class GameHandler : MonoBehaviour
         {
             GameOver();
         }
-    }
+    }*/
 
     public bool isGameActive()
     {
         return active;
+    }
+
+    private void DestroyObjects()
+    {
+        CubesController.GetInstance().DestroyAll();
+        Platform.Instance.Destroy();
     }
 }

@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 4638081207150679272}
   - component: {fileID: 8341870224581276297}
   - component: {fileID: 347566712178019507}
-  - component: {fileID: 5116171309698290326}
   - component: {fileID: -6672300871410889491}
   m_Layer: 0
   m_Name: Blue Cube
@@ -133,18 +132,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &5116171309698290326
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1709452816721076506}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ecae619b25d9d174aa4c3c65c1fb1c1f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!82 &-6672300871410889491
 AudioSource:
   m_ObjectHideFlags: 0
