@@ -6,6 +6,7 @@ public class GameHandler : MonoBehaviour
 {
     public static GameHandler Instance;
     private bool active;
+    // public int Level;
 
     private void Awake()
     {
@@ -39,6 +40,7 @@ public class GameHandler : MonoBehaviour
 
     public void StartGame()
     {
+        // Level = level;
         Tower.Instance.CreateTower();
         Platform.Instance.CreatePlatform();
         PlayerCube.Instance.CreatePlayerCube();
