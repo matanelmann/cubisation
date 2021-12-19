@@ -51,6 +51,11 @@ public class Level : MonoBehaviour
         }
     }
 
+    private void movePlatform()
+    {
+        // scripInstance = Instantiate(GameAssets.instance.platformMover).GetComponent<PlatformMover>();
+    }
+
     private void buildPlatform()
     {
         platform = new Platform(Instantiate(GameAssets.instance.platform, GameConfig.GameTransform), cc, GetTowerHeight());

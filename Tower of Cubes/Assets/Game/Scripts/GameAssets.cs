@@ -13,7 +13,5 @@ public class GameAssets : MonoBehaviour
     public Transform redCube;
     public Transform blueCube;
     public Transform platform;
-    public Transform arrow;
-
-   
+    public Transform platformMover;   
 }
