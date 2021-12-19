@@ -6,6 +6,7 @@ public class GameHandler : MonoBehaviour
 {
     public static GameHandler Instance;
     public InputManager input;
+    private Level level;
     private bool active;
 
     private void Awake()
@@ -37,6 +38,7 @@ public class GameHandler : MonoBehaviour
     // }
     private void Init() {
         active = false;
+        level = Level.GetInstance();
         CubesController.GetInstance().Init();
         //MainMenu.Display();
     }
@@ -44,7 +46,6 @@ public class GameHandler : MonoBehaviour
     public void StartGame()
     {
         active = true;
-        Debug.Log("Calling StartLevel");
         Level.GetInstance().StartLevel(0);
     }
 
@@ -98,7 +99,6 @@ public class GameHandler : MonoBehaviour
 
     private void DestroyObjects()
     {
-        CubesController.GetInstance().DestroyAll();
-        Platform.Instance.Destroy();
+        level.Clear();
     }
 }

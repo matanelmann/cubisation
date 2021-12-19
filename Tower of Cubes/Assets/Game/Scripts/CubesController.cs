@@ -47,20 +47,15 @@ public class CubesController : MonoBehaviour
         }
     }
 
-    public void CreateBlueCube()
-    {
-        CreateCube(Cube.Type.Blue, new Vector3(GameConfig.LEFT_EDGE / 2f, Platform.Instance.getPlatformY() + GetLast(Cube.Type.Red).length / 2), Vector3.one * GetLast(Cube.Type.Red).scale);
-    }
-
     public Cube GetLast(Cube.Type type)
     {
         if (type == Cube.Type.Red)
         {
-            return getCube(RedCubes, 0);
+            return getCubeByIndex(RedCubes, 0);
         }
         else
         {
-            return getCube(BlueCubes, 0);
+            return getCubeByIndex(BlueCubes, 0);
         }
     }
 
@@ -68,21 +63,21 @@ public class CubesController : MonoBehaviour
     {
         if (type == Cube.Type.Red)
         {
-            return getCube(RedCubes, 1);
+            return getCubeByIndex(RedCubes, 1);
         }
         else
         {
-            return getCube(BlueCubes, 1);
+            return getCubeByIndex(BlueCubes, 1);
         }
     }
 
-    private Cube getCube(List<Cube> cubes, int index)
+    private Cube getCubeByIndex(List<Cube> cubes, int index)
     {
         if (cubes.Count == 0)
         {
             return null;
         }
-        return cubes[cubes.Count - 1];
+        return cubes[cubes.Count - 1 - index];
     }
 
     public Cube GetMainBlue()

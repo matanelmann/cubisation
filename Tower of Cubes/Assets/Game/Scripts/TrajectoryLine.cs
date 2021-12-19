@@ -8,7 +8,7 @@ public class TrajectoryLine : MonoBehaviour
     public static LineRenderer lr;
     private void Awake()
     {
-        lr = GameConfig.GameTransform.GetComponent<LineRenderer>();
+        lr = gameObject.GetComponent<LineRenderer>();
     }
     public static void RenderLine(Vector3 startPoint, Vector3 endPoint)
     {

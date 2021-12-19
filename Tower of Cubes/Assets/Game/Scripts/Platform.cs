@@ -2,28 +2,32 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Platform : MonoBehaviour
+public class Platform
 {
-    Vector3 nextPosition = Vector3.zero;
-    Vector3 nextScale;
-    private bool moveToNextPosition = false;
-    Transform pt;
-    public static Platform Instance;
-    private void Awake()
+    private Vector3 nextPosition, nextScale;
+    public Transform pt;
+    
+    public Platform(Transform pt, CubesController cc, float towerHeight)
     {
-        Instance = this;
-    }
-    public void CreatePlatform()
-    {
-        pt = Instantiate(GameAssets.instance.platform, GameConfig.GameTransform);
-        pt.position = new Vector3(GameConfig.LEFT_EDGE, Level.GetInstance().GetTowerHeight() - CubesController.GetInstance().GetLast(Cube.Type.Red).length);
-        pt.localScale = new Vector3(1 + (CubesController.GetInstance().GetSecondToLast(Cube.Type.Red).cubeTransform.position.x - GameConfig.LEFT_EDGE - GameConfig.PLATFORM_LENGTH) / GameConfig.PLATFORM_LENGTH, 1);
+        this.pt = pt;
+        setInitial(cc, towerHeight);
+        SetNext(cc);
     }
 
-    public float getPlatformY()
+    private void setInitial(CubesController cc, float towerHeight)
     {
-        return pt.position.y;
+        pt.position = new Vector3(GameConfig.LEFT_EDGE, towerHeight - cc.GetMainRed().length);
+        //pt.localScale = new Vector3(1 + (cc.GetMainRed().cubeTransform.position.x - GameConfig.LEFT_EDGE - GameConfig.PLATFORM_LENGTH) / GameConfig.PLATFORM_LENGTH, 1);
+        pt.localScale = new Vector3(1 + (cc.GetSecondToLast(Cube.Type.Red).cubeTransform.position.x - GameConfig.LEFT_EDGE - GameConfig.PLATFORM_LENGTH) / GameConfig.PLATFORM_LENGTH, 1);
     }
+
+    public void SetNext(CubesController cc)
+    {
+        nextPosition -= new Vector3(0, cc.GetMainRed().length);
+        nextScale = new Vector3(1 + (cc.GetSecondToLast(Cube.Type.Red).cubeTransform.position.x - GameConfig.LEFT_EDGE - GameConfig.PLATFORM_LENGTH) / GameConfig.PLATFORM_LENGTH, 1);
+    }
+
+    /*
 
     public void MovePlatform()
     {
@@ -51,23 +55,5 @@ public class Platform : MonoBehaviour
             }
         }
     }
-
-    public void setNextPlatformPosition()
-    {
-        if (Level.GetInstance().TowerEmpty())
-        {
-            nextPosition = new Vector3(GameConfig.LEFT_EDGE, GameConfig.BOTTOM_EDGE);
-        }
-        else
-        {
-            nextPosition = new Vector3(GameConfig.LEFT_EDGE, pt.position.y - CubesController.GetInstance().GetLast(Cube.Type.Red).length);
-            nextScale = new Vector3(1 + (CubesController.GetInstance().GetSecondToLast(Cube.Type.Red).cubeTransform.position.x - GameConfig.LEFT_EDGE - GameConfig.PLATFORM_LENGTH) / GameConfig.PLATFORM_LENGTH, 1);
-        }
-    }
-
-    public void Destroy()
-    {
-        moveToNextPosition = false;
-        Destroy(pt.gameObject);
-    }
+    }*/
 }

@@ -7,6 +7,8 @@ public class Level : MonoBehaviour
     public static Level instance;
     public int LevelNum;
     public LevelSettings.GameSet ST;
+    private CubesController cc;
+    private Platform platform;
 
     private void Awake()
     {
@@ -23,12 +25,18 @@ public class Level : MonoBehaviour
         return instance;
     }
 
-    public void StartLevel(int LevelNum)
+    private void init(int LevelNum)
     {
         this.LevelNum = LevelNum;
         ST = LevelSettings.Get(LevelNum);
-        Debug.Log("Building Tower and player");
+        cc = CubesController.GetInstance();
+    }
+
+    public void StartLevel(int LevelNum)
+    {
+        init(LevelNum);
         buildTower();
+        buildPlatform();
         SpawnNewPlayer();
     }
 
@@ -39,31 +47,38 @@ public class Level : MonoBehaviour
         {
             scale = ST.CUBE_ROOT_SCALE * Mathf.Pow(ST.SCALE_DECREASE_RATE, i);
             length = scale * 5.12f;
-            CubesController.GetInstance().CreateCube(Cube.Type.Red, new Vector3(GameConfig.TOWER_X - length / 2, GetTowerHeight()), Vector3.one * scale);
+            cc.CreateCube(Cube.Type.Red, new Vector3(GameConfig.TOWER_X - length / 2, GetTowerHeight()), Vector3.one * scale);
         }
+    }
+
+    private void buildPlatform()
+    {
+        platform = new Platform(Instantiate(GameAssets.instance.platform, GameConfig.GameTransform), cc, GetTowerHeight());
     }
 
     public void SpawnNewPlayer()
     {
-        CubesController.GetInstance().CreateBlueCube();
+        cc.CreateCube(Cube.Type.Blue, new Vector3(GameConfig.LEFT_EDGE / 2f, platform.pt.position.y + cc.GetLast(Cube.Type.Red).length / 2), Vector3.one * cc.GetLast(Cube.Type.Red).scale);
     }
 
     public float GetTowerHeight()
     {
-        float result = 0;
-        foreach (Cube cube in CubesController.GetInstance().RedCubes)
+        float height = 0;
+        foreach (Cube cube in cc.RedCubes)
         {
-            result += cube.scale;
+            height += cube.scale;
         }
-        return GameConfig.GROUND_Y + Mathf.Abs(result * 5.12f);
+        return GameConfig.GROUND_Y + Mathf.Abs(height * 5.12f);
     }
 
     public bool TowerEmpty()
     {
-        if (CubesController.GetInstance().RedCubes.Count == 0)
-        {
-            return true;
-        }
-        return false;
+        return cc.RedCubes.Count == 0;
+    }
+
+    public void Clear()
+    {
+        cc.DestroyAll();
+        Destroy(platform.pt.gameObject);
     }
 }

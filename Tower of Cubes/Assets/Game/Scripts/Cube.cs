@@ -64,11 +64,7 @@ public class Cube
     public bool outOfBounds()
     {
         // If the cube is out of screen bounds
-        if (cubeTransform.position.x > GameConfig.RIGHT_EDGE + this.length || cubeTransform.position.x < GameConfig.LEFT_EDGE - this.length)
-        {
-            return true;
-        }
-        return false;
+        return (cubeTransform.position.x > GameConfig.RIGHT_EDGE + this.length || cubeTransform.position.x < GameConfig.LEFT_EDGE - this.length);
     }
 
     private bool isMain()
@@ -78,11 +74,7 @@ public class Cube
 
     private bool cubeFell()
     {
-        if (cubeTransform.position.y < initial_Y - length) // If the cube fell down from the tower
-        {
-            return true;
-        }
-        return false;
+        return (cubeTransform.position.y < initial_Y - length) ; // If the cube fell down from the tower
     }
 
     private void ReportPhaseCompletion()

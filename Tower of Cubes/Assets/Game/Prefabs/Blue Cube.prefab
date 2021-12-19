@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8341870224581276297}
   - component: {fileID: 347566712178019507}
   - component: {fileID: -6672300871410889491}
+  - component: {fileID: -914114576313228176}
   m_Layer: 0
   m_Name: Blue Cube
   m_TagString: PlayerCube
@@ -228,3 +229,15 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &-914114576313228176
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1709452816721076506}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea9eb5a72ab1b6246a47ce7e7a64456f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
