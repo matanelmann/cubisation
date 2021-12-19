@@ -7,7 +7,7 @@ public class CubesController : MonoBehaviour
     private static CubesController instance;
     [HideInInspector] public List<Cube> BlueCubes, RedCubes;
     private Cube mainBlue;
-    private Cube mainRed;
+    private Cube mainRed, secondaryRed;
 
     private void Awake()
     {
@@ -20,8 +20,7 @@ public class CubesController : MonoBehaviour
 
     private void Update()
     {
-        checkCubesBounds(BlueCubes);
-        checkCubesBounds(RedCubes);
+        updateCubes();
     }
 
     public void Init()
@@ -35,13 +34,17 @@ public class CubesController : MonoBehaviour
         Cube newCube;
         if (type == Cube.Type.Blue)
         {
-            newCube = new Cube(Instantiate(GameAssets.instance.blueCube, GameConfig.GameTransform), type, position, scale);
+            newCube = new Cube(Instantiate(GameAssets.instance.blueCube, GameConfig.GameTransform), type, position, scale, instance);
             mainBlue = newCube;
             BlueCubes.Add(newCube);
         }
         else
         {
-            newCube = new Cube(Instantiate(GameAssets.instance.redCube, GameConfig.GameTransform), type, position, scale);
+            newCube = new Cube(Instantiate(GameAssets.instance.redCube, GameConfig.GameTransform), type, position, scale, instance);
+            if (RedCubes.Count > 0)
+            {
+                secondaryRed = mainRed;
+            }
             mainRed = newCube;
             RedCubes.Add(newCube);
         }
@@ -105,6 +108,36 @@ public class CubesController : MonoBehaviour
         {
             cubes.Remove(cube);
         }
+    }
+    
+    private void updateMainRed()
+    {
+        if (mainRed != null && mainRed.OffTower())
+        {
+            if (RedCubes.Count >= 2)
+            {
+                mainRed = RedCubes[RedCubes.IndexOf(mainRed) - 1];
+                if (secondaryRed != null && RedCubes.Count != 2) secondaryRed = RedCubes[RedCubes.IndexOf(mainRed) - 1];
+            }
+        }
+    }
+
+    private void updateCubes()
+    {
+        checkCubesBounds(BlueCubes);
+        checkCubesBounds(RedCubes);
+        updateMainRed();
+    }
+
+    public void StartPhaseCompletionTimer()
+    {
+        Debug.Log("Phase Completion Timer Started");
+        Invoke("ReportPhaseCompletion", 2f);
+    }
+
+    private void ReportPhaseCompletion()
+    {
+        Level.GetInstance().CheckPhase();
     }
 
     private void DestroyCubes(List<Cube> cubes)

@@ -280,7 +280,7 @@ MonoBehaviour:
   redCube: {fileID: 924478261583262194, guid: 0f96bdddfa2324c4bbbcd7ef9c92d770, type: 3}
   blueCube: {fileID: 5516640999057192128, guid: 0538f79ce49e41649bb7e3b0d209f6e4, type: 3}
   platform: {fileID: 418392999321770232, guid: 43af943a34eddf540ac4a922e5c4f504, type: 3}
-  platformMover: {fileID: 0}
+  platformMover: {fileID: 3808580068715480719, guid: 17583bfb0dc03ae4283b942a4e24c9b9, type: 3}
 --- !u!4 &465628148
 Transform:
   m_ObjectHideFlags: 0

@@ -12,10 +12,12 @@ public class Cube
     public Rigidbody2D rb;
     public bool MouseOver;
     private float initial_Y;
+    private CubesController cc;
 
     // Constructor
-    public Cube(Transform cubeTransform, Type type, Vector3 position, Vector3 scale)
+    public Cube(Transform cubeTransform, Type type, Vector3 position, Vector3 scale, CubesController cc)
     {
+        this.cc = cc;
         this.type = type;
         this.cubeTransform = cubeTransform;
         this.cubeTransform.position = position;
@@ -45,13 +47,13 @@ public class Cube
 
     // Relevant for Blue cubes only
     public void OnCollision(Collision2D col)
-    {
+    {        
         if (isMain() && GameHandler.GetInstance().isGameActive())
         {
-            if (!Level.GetInstance().TowerEmpty() && col.transform == CubesController.GetInstance().GetMainRed().cubeTransform)
+            if (!Level.GetInstance().TowerEmpty() && col.transform == cc.GetMainRed().cubeTransform)
             {
                 // SoundManager.playClack();
-                ReportPhaseCompletion();
+                cc.StartPhaseCompletionTimer();
             }
         }
     }
@@ -67,18 +69,13 @@ public class Cube
         return (cubeTransform.position.x > GameConfig.RIGHT_EDGE + this.length || cubeTransform.position.x < GameConfig.LEFT_EDGE - this.length);
     }
 
-    private bool isMain()
+    public bool isMain()
     {
-        return this == CubesController.GetInstance().GetMainBlue();
+        return (this == cc.GetMainBlue());
     }
 
-    private bool cubeFell()
+    public bool OffTower()
     {
-        return (cubeTransform.position.y < initial_Y - length) ; // If the cube fell down from the tower
-    }
-
-    private void ReportPhaseCompletion()
-    {
-        //Level.GetInstance().CheckPhase();
+        return (gameObj == null || cubeTransform.position.y < initial_Y - length) ; // If the cube fell down from the tower
     }
 }

@@ -9,6 +9,7 @@ public class Level : MonoBehaviour
     public LevelSettings.GameSet ST;
     private CubesController cc;
     private Platform platform;
+    private PlatformMover pm;
 
     private void Awake()
     {
@@ -37,7 +38,7 @@ public class Level : MonoBehaviour
         init(LevelNum);
         buildTower();
         buildPlatform();
-        SpawnNewPlayer();
+        spawnNewPlayer();
     }
 
     private void buildTower()
@@ -50,17 +51,21 @@ public class Level : MonoBehaviour
             cc.CreateCube(Cube.Type.Red, new Vector3(GameConfig.TOWER_X - length / 2, GetTowerHeight()), Vector3.one * scale);
         }
     }
-    public Platform GetPlatformReference()
-    {
-        return this.platform;
-    }
-
-
+    
     private void movePlatform()
     {
-        
-        PlatformMover scriptInstance = Instantiate(GameAssets.instance.platformMover).GetComponent<PlatformMover>();
+        Debug.Log(platform.pt.position);
+        Debug.Log("NextPosition: " + platform.nextPosition);
+        platform.SetNext(cc);
+        pm = Instantiate(GameAssets.instance.platformMover, GameConfig.GameTransform).GetComponent<PlatformMover>();
+        pm.GetReferences(this, platform);
+    }
 
+    public void FinishPlatformMovement()
+    {
+        Destroy(pm.gameObject);
+        spawnNewPlayer();
+        Debug.Log(platform.pt.position);
     }
 
     private void buildPlatform()
@@ -68,9 +73,14 @@ public class Level : MonoBehaviour
         platform = new Platform(Instantiate(GameAssets.instance.platform, GameConfig.GameTransform), cc, GetTowerHeight());
     }
 
-    public void SpawnNewPlayer()
+    private void spawnNewPlayer()
     {
         cc.CreateCube(Cube.Type.Blue, new Vector3(GameConfig.LEFT_EDGE / 2f, platform.pt.position.y + cc.GetLast(Cube.Type.Red).length / 2), Vector3.one * cc.GetLast(Cube.Type.Red).scale);
+    }
+
+    public void CheckPhase()
+    {
+        //if (cc.main)
     }
 
     public float GetTowerHeight()
