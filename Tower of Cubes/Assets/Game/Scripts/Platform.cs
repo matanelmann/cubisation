@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class Platform
 {
-    private Vector3 nextPosition, nextScale;
+    public Vector3 nextPosition, nextScale;
     public Transform pt;
+
     
     public Platform(Transform pt, CubesController cc, float towerHeight)
     {
@@ -26,6 +27,8 @@ public class Platform
         nextPosition -= new Vector3(0, cc.GetMainRed().length);
         nextScale = new Vector3(1 + (cc.GetSecondToLast(Cube.Type.Red).cubeTransform.position.x - GameConfig.LEFT_EDGE - GameConfig.PLATFORM_LENGTH) / GameConfig.PLATFORM_LENGTH, 1);
     }
+
+
 
     /*
 

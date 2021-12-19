@@ -50,10 +50,17 @@ public class Level : MonoBehaviour
             cc.CreateCube(Cube.Type.Red, new Vector3(GameConfig.TOWER_X - length / 2, GetTowerHeight()), Vector3.one * scale);
         }
     }
+    public Platform GetPlatformReference()
+    {
+        return this.platform;
+    }
+
 
     private void movePlatform()
     {
-        // scripInstance = Instantiate(GameAssets.instance.platformMover).GetComponent<PlatformMover>();
+        
+        PlatformMover scriptInstance = Instantiate(GameAssets.instance.platformMover).GetComponent<PlatformMover>();
+
     }
 
     private void buildPlatform()
