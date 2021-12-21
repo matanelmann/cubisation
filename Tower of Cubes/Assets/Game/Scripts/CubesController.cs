@@ -116,8 +116,9 @@ public class CubesController : MonoBehaviour
         {
             if (RedCubes.Count >= 2)
             {
-                mainRed = RedCubes[RedCubes.IndexOf(mainRed) - 1];
-                if (secondaryRed != null && RedCubes.Count != 2) secondaryRed = RedCubes[RedCubes.IndexOf(mainRed) - 1];
+                mainRed = mainRed.prevCube;
+                //mainRed = RedCubes[RedCubes.IndexOf(mainRed) - 1];
+                //if (secondaryRed != null && RedCubes.Count != 2) secondaryRed = RedCubes[RedCubes.IndexOf(mainRed) - 1];
             }
         }
     }

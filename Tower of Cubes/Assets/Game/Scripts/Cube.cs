@@ -13,6 +13,7 @@ public class Cube
     public bool MouseOver;
     private float initial_Y;
     private CubesController cc;
+    public Cube prevCube;
 
     // Constructor
     public Cube(Transform cubeTransform, Type type, Vector3 position, Vector3 scale, CubesController cc)
@@ -33,6 +34,10 @@ public class Cube
             cubeTransform.gameObject.GetComponent<BlueCubeHandler>().cube = this;
         }
         adjustCubeSettings();
+        if (type == Type.Red)
+        {
+            this.prevCube = cc.GetMainRed();
+        }
     }
     private void adjustCubeSettings()
     {
@@ -76,6 +81,6 @@ public class Cube
 
     public bool OffTower()
     {
-        return (gameObj == null || cubeTransform.position.y < initial_Y - length) ; // If the cube fell down from the tower
+        return (gameObj == null || cubeTransform.position.y < initial_Y - length); // If the cube fell down from the tower
     }
 }
