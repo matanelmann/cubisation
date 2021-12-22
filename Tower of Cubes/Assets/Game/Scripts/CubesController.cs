@@ -138,7 +138,7 @@ public class CubesController : MonoBehaviour
 
     public void StartPhaseCompletionTimer()
     {
-        Invoke("ReportPhaseCompletion", 2f);
+        Invoke("ReportPhaseCompletion", 2.5f);
     }
 
     private void ReportPhaseCompletion()
@@ -162,5 +162,6 @@ public class CubesController : MonoBehaviour
     {
         DestroyCubes(BlueCubes);
         DestroyCubes(RedCubes);
+        CancelInvoke();
     }
 }

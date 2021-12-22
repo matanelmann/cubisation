@@ -9,7 +9,7 @@ public class LevelSettings : MonoBehaviour
     {
         GsList = new List<GameSet>();
         // Level 0 (Toturial)
-        GsList.Add(new GameSet(new Dictionary<string, float>() { { "TOWER_HEIGHT", 6f }, { "CUBE_ROOT_SCALE", 2f }, { "FORCE", 500f }, { "GRAVITY", 4f }, { "MASS", 3f }, { "FRICTION", 0.1f }, { "BOUNCINESS", 0.3f }, { "SCALE_DECREASE_RATE", 0.9f } }));
+        GsList.Add(new GameSet(new Dictionary<string, float>() { { "TOWER_HEIGHT", 6f }, { "CUBE_ROOT_SCALE", 3f }, { "FORCE", 600f }, { "GRAVITY", 4f }, { "MASS", 3f }, { "FRICTION", 0.1f }, { "BOUNCINESS", 0.3f }, { "SCALE_DECREASE_RATE", 0.8f } }));
         // Level 1
         GsList.Add(new GameSet(new Dictionary<string, float>() { { "TOWER_HEIGHT", 6f }, { "CUBE_ROOT_SCALE", 2f }, { "FORCE", 400f }, { "GRAVITY", 4f }, { "MASS", 3f }, { "FRICTION", 0.1f }, { "BOUNCINESS", 0.3f }, { "SCALE_DECREASE_RATE", 0.9f } }));
         // Level 2

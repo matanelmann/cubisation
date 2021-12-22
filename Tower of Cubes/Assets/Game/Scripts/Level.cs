@@ -96,6 +96,11 @@ public class Level : MonoBehaviour
     public void Clear()
     {
         cc.DestroyAll();
+        if (pm != null)
+        {
+            Destroy(pm.gameObject);
+        }
         Destroy(platform.pt.gameObject);
+        
     }
 }
