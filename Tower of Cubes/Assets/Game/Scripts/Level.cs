@@ -52,20 +52,20 @@ public class Level : MonoBehaviour
         }
     }
     
-    private void movePlatform()
+    public void MovePlatform()
     {
-        Debug.Log(platform.pt.position);
-        Debug.Log("NextPosition: " + platform.nextPosition);
-        platform.SetNext(cc);
-        pm = Instantiate(GameAssets.instance.platformMover, GameConfig.GameTransform).GetComponent<PlatformMover>();
-        pm.GetReferences(this, platform);
+        if (pm == null)
+        {
+            platform.SetNext(cc);
+            pm = Instantiate(GameAssets.instance.platformMover, GameConfig.GameTransform).GetComponent<PlatformMover>();
+            pm.GetReferences(this, platform);
+        }
     }
 
     public void FinishPlatformMovement()
     {
         Destroy(pm.gameObject);
         spawnNewPlayer();
-        Debug.Log(platform.pt.position);
     }
 
     private void buildPlatform()
@@ -76,11 +76,6 @@ public class Level : MonoBehaviour
     private void spawnNewPlayer()
     {
         cc.CreateCube(Cube.Type.Blue, new Vector3(GameConfig.LEFT_EDGE / 2f, platform.pt.position.y + cc.GetLast(Cube.Type.Red).length / 2), Vector3.one * cc.GetLast(Cube.Type.Red).scale);
-    }
-
-    public void CheckPhase()
-    {
-        //if (cc.main)
     }
 
     public float GetTowerHeight()

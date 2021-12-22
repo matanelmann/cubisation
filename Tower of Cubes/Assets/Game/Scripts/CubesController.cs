@@ -20,7 +20,10 @@ public class CubesController : MonoBehaviour
 
     private void Update()
     {
-        updateCubes();
+        if (GameHandler.GetInstance().isGameActive())
+        {
+            updateCubes();
+        }
     }
 
     public void Init()
@@ -103,10 +106,18 @@ public class CubesController : MonoBehaviour
                 removeList.Add(cube);
                 Destroy(cube.gameObj);
             }
+            else if (cube.type == Cube.Type.Blue && cube.OffTower())
+            {
+                GameHandler.GetInstance().GameOver();
+            }
         }
         foreach (Cube cube in removeList)
         {
             cubes.Remove(cube);
+        }
+        if (removeList.Count > 0 && cubes == BlueCubes)
+        {
+            GameHandler.GetInstance().GameOver();
         }
     }
     
@@ -114,12 +125,7 @@ public class CubesController : MonoBehaviour
     {
         if (mainRed != null && mainRed.OffTower())
         {
-            if (RedCubes.Count >= 2)
-            {
-                mainRed = mainRed.prevCube;
-                //mainRed = RedCubes[RedCubes.IndexOf(mainRed) - 1];
-                //if (secondaryRed != null && RedCubes.Count != 2) secondaryRed = RedCubes[RedCubes.IndexOf(mainRed) - 1];
-            }
+            mainRed = mainRed.prevCube;
         }
     }
 
@@ -132,13 +138,12 @@ public class CubesController : MonoBehaviour
 
     public void StartPhaseCompletionTimer()
     {
-        Debug.Log("Phase Completion Timer Started");
         Invoke("ReportPhaseCompletion", 2f);
     }
 
     private void ReportPhaseCompletion()
     {
-        Level.GetInstance().CheckPhase();
+        Level.GetInstance().MovePlatform();
     }
 
     private void DestroyCubes(List<Cube> cubes)

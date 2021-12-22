@@ -12,10 +12,9 @@ public class PlatformMover : MonoBehaviour
         this.level = level;
         this.platform = platform;
     }
-    
     void Update()
     {
-        if (platform != null)
+        if (platform != null && GameHandler.GetInstance().isGameActive())
         {
             if (platform.pt.position != platform.nextPosition || platform.pt.localScale != platform.nextScale)
             {

@@ -52,7 +52,7 @@ public class Cube
 
     // Relevant for Blue cubes only
     public void OnCollision(Collision2D col)
-    {        
+    {
         if (isMain() && GameHandler.GetInstance().isGameActive())
         {
             if (!Level.GetInstance().TowerEmpty() && col.transform == cc.GetMainRed().cubeTransform)

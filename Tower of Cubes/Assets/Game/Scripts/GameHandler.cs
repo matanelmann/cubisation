@@ -26,16 +26,6 @@ public class GameHandler : MonoBehaviour
         return Instance;
     }
 
-
-
-    // void Start()
-    // {
-    //     Play = true;
-    //     Tower.CreateTower();
-    //     Platform.CreatePlatform();
-    //     PlayerCube.CreatePlayerCube();
-    //     sound = gameObject.GetComponent<AudioSource>();
-    // }
     private void Init() {
         active = false;
         level = Level.GetInstance();
@@ -54,7 +44,6 @@ public class GameHandler : MonoBehaviour
         if (active)
         {
             input.Check();
-            //Tower.Instance.UpdateTower();
         }
     }
 
@@ -78,19 +67,6 @@ public class GameHandler : MonoBehaviour
         active = false;
         Debug.Log("Level Passed");
     }
-
-    /*public void CheckPhase()
-    {
-        if (Tower.Instance.newTopCube)
-        {
-            Tower.Instance.newTopCube = false;
-            Platform.Instance.MovePlatform();
-        }
-        else
-        {
-            GameOver();
-        }
-    }*/
 
     public bool isGameActive()
     {
