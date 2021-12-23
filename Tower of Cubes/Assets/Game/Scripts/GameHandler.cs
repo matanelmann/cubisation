@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameHandler : MonoBehaviour
 {
@@ -8,7 +9,7 @@ public class GameHandler : MonoBehaviour
     public InputManager input;
     public SoundManager sound;
     private Level level;
-    private bool active;
+    private bool active = false;
 
     private void Awake()
     {
@@ -17,25 +18,27 @@ public class GameHandler : MonoBehaviour
     }
 
     // Temporary:
+    
     private void Start()
     {
         StartGame(); // Should later on be called from the main menu at first!
     }
-
+    
     public static GameHandler GetInstance()
     {
         return Instance;
     }
 
     private void Init() {
+        Debug.Log("Init of GameHandler");
         active = false;
         level = Level.GetInstance();
         CubesController.GetInstance().Init();
-        //MainMenu.Display();
     }
 
     public void StartGame()
     {
+        SceneManager.LoadScene(1);
         active = true;
         Level.GetInstance().StartLevel(0);
     }
