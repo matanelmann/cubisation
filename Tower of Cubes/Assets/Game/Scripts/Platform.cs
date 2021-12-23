@@ -6,6 +6,7 @@ public class Platform
 {
     public Vector3 nextPosition, nextScale;
     public Transform pt;
+    
 
     public Platform(Transform pt, CubesController cc, float towerHeight)
     {
@@ -32,8 +33,9 @@ public class Platform
     {
         if (cc.RedCubes.Count < 2)
         {
-            pt.position = new Vector3(GameConfig.LEFT_EDGE, GameConfig.GROUND_Y - 10f);
+            pt.position = new Vector3(GameConfig.LEFT_EDGE, GameConfig.GROUND_Y - 100f);
             pt.localScale = new Vector3(1 + (cc.GetMainRed().cubeTransform.position.x - GameConfig.LEFT_EDGE - GameConfig.PLATFORM_LENGTH) / GameConfig.PLATFORM_LENGTH, 1);
+            Level.GetInstance().spawnNewPlayer();
         }
         else
         {

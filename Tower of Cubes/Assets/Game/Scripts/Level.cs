@@ -73,9 +73,14 @@ public class Level : MonoBehaviour
         platform = new Platform(Instantiate(GameAssets.instance.platform, GameConfig.GameTransform), cc, GetTowerHeight());
     }
 
-    private void spawnNewPlayer()
+    public void spawnNewPlayer()
     {
-        cc.CreateCube(Cube.Type.Blue, new Vector3(GameConfig.LEFT_EDGE / 2f, platform.pt.position.y + cc.GetLast(Cube.Type.Red).length / 2), Vector3.one * cc.GetLast(Cube.Type.Red).scale);
+        if (cc.RedCubes.Count < 2) {
+            cc.CreateCube(Cube.Type.Blue, new Vector3(GameConfig.LEFT_EDGE / 2f, platform.pt.position.y + 100f + cc.GetLast(Cube.Type.Red).length / 2), Vector3.one * cc.GetLast(Cube.Type.Red).scale);
+        } else 
+        {
+            cc.CreateCube(Cube.Type.Blue, new Vector3(GameConfig.LEFT_EDGE / 2f, platform.pt.position.y + cc.GetLast(Cube.Type.Red).length / 2), Vector3.one * cc.GetLast(Cube.Type.Red).scale);
+        }
     }
 
     public float GetTowerHeight()
