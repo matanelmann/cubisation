@@ -14,9 +14,10 @@ public class Cube
     private float initial_Y;
     private CubesController cc;
     public Cube prevCube;
+    private SoundManager sound;
 
     // Constructor
-    public Cube(Transform cubeTransform, Type type, Vector3 position, Vector3 scale, CubesController cc)
+    public Cube(Transform cubeTransform, Type type, Vector3 position, Vector3 scale, CubesController cc, SoundManager sound)
     {
         this.cc = cc;
         this.type = type;
@@ -29,6 +30,7 @@ public class Cube
         this.initial_Y = cubeTransform.position.y;
         this.rb = cubeTransform.gameObject.GetComponent<Rigidbody2D>();
         this.MouseOver = false;
+        this.sound = sound;
         if (type == Type.Blue)
         {
             cubeTransform.gameObject.GetComponent<BlueCubeHandler>().cube = this;
@@ -57,7 +59,7 @@ public class Cube
         {
             if (!Level.GetInstance().TowerEmpty() && col.transform == cc.GetMainRed().cubeTransform)
             {
-                // SoundManager.playClack();
+                sound.Clack();
                 cc.StartPhaseCompletionTimer();
             }
         }

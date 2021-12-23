@@ -33,9 +33,8 @@ public class Platform
     {
         if (cc.RedCubes.Count < 2)
         {
-            pt.position = new Vector3(GameConfig.LEFT_EDGE, GameConfig.GROUND_Y - 100f);
-            pt.localScale = new Vector3(1 + (cc.GetMainRed().cubeTransform.position.x - GameConfig.LEFT_EDGE - GameConfig.PLATFORM_LENGTH) / GameConfig.PLATFORM_LENGTH, 1);
-            Level.GetInstance().spawnNewPlayer();
+            nextPosition = new Vector3(GameConfig.LEFT_EDGE, GameConfig.GROUND_Y - GameConfig.PLATFORM_HEIGHT);
+            nextScale = new Vector3(1 + (cc.GetMainRed().cubeTransform.position.x - GameConfig.LEFT_EDGE - GameConfig.PLATFORM_LENGTH) / GameConfig.PLATFORM_LENGTH, 1);
         }
         else
         {
@@ -43,36 +42,4 @@ public class Platform
             nextScale = new Vector3(1 + (cc.GetSecondToLast(Cube.Type.Red).cubeTransform.position.x - GameConfig.LEFT_EDGE - GameConfig.PLATFORM_LENGTH) / GameConfig.PLATFORM_LENGTH, 1);
         }
     }
-
-
-
-    /*
-
-    public void MovePlatform()
-    {
-        setNextPlatformPosition();
-        moveToNextPosition = true;
-    }
-
-    void Update()
-    {
-        if (moveToNextPosition && GameHandler.Instance.isGameActive())
-        {
-            if (pt.position.Equals(nextPosition)) // Platform finished moving to the next position
-            {
-                moveToNextPosition = false;
-                Level.GetInstance().SpawnNewPlayer(); // Spawn a new PlayerCube
-            }
-            else // Continue moving the platform
-            {
-                if (nextPosition.Equals(Vector3.zero))
-                {
-                    setNextPlatformPosition();
-                }
-                pt.position = Vector3.MoveTowards(pt.position, nextPosition, GameConfig.PLATFORM_MOVING_SPEED * Time.deltaTime);
-                pt.localScale = Vector3.MoveTowards(pt.localScale, nextScale, (GameConfig.PLATFORM_MOVING_SPEED / 50) * Time.deltaTime);
-            }
-        }
-    }
-    }*/
 }

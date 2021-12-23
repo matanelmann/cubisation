@@ -6,6 +6,7 @@ public class GameHandler : MonoBehaviour
 {
     public static GameHandler Instance;
     public InputManager input;
+    public SoundManager sound;
     private Level level;
     private bool active;
 
@@ -57,6 +58,7 @@ public class GameHandler : MonoBehaviour
     public void GameOver()
     {
         // To-do
+        level.cc.CancelInvoke();
         active = false;
         Debug.Log("Game Over");
     }
@@ -65,6 +67,7 @@ public class GameHandler : MonoBehaviour
     {
         // To-do
         active = false;
+        sound.LevelPassed();
         Debug.Log("Level Passed");
     }
 

@@ -5,6 +5,7 @@ using UnityEngine;
 public class CubesController : MonoBehaviour
 {
     private static CubesController instance;
+    private static SoundManager sound;
     [HideInInspector] public List<Cube> BlueCubes, RedCubes;
     private Cube mainBlue;
     private Cube mainRed, secondaryRed;
@@ -30,6 +31,7 @@ public class CubesController : MonoBehaviour
     {
         BlueCubes = new List<Cube>();
         RedCubes = new List<Cube>();
+        sound = SoundManager.GetInstance();
     }
 
     public void CreateCube(Cube.Type type, Vector3 position, Vector3 scale)
@@ -37,13 +39,13 @@ public class CubesController : MonoBehaviour
         Cube newCube;
         if (type == Cube.Type.Blue)
         {
-            newCube = new Cube(Instantiate(GameAssets.instance.blueCube, GameConfig.GameTransform), type, position, scale, instance);
+            newCube = new Cube(Instantiate(GameAssets.instance.blueCube, GameConfig.GameTransform), type, position, scale, instance, sound);
             mainBlue = newCube;
             BlueCubes.Add(newCube);
         }
         else
         {
-            newCube = new Cube(Instantiate(GameAssets.instance.redCube, GameConfig.GameTransform), type, position, scale, instance);
+            newCube = new Cube(Instantiate(GameAssets.instance.redCube, GameConfig.GameTransform), type, position, scale, instance, sound);
             if (RedCubes.Count > 0)
             {
                 secondaryRed = mainRed;
@@ -143,7 +145,14 @@ public class CubesController : MonoBehaviour
 
     private void ReportPhaseCompletion()
     {
-        Level.GetInstance().MovePlatform();
+        if (RedCubes.Count == 0)
+        {
+            GameHandler.GetInstance().LevelPassed();
+        }
+        else
+        {
+            Level.GetInstance().MovePlatform();
+        }
     }
 
     private void DestroyCubes(List<Cube> cubes)

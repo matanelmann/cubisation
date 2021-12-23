@@ -16,6 +16,7 @@ public class PlatformMover : MonoBehaviour
     {
         if (platform != null && GameHandler.GetInstance().isGameActive())
         {
+            
             if (platform.pt.position != platform.nextPosition || platform.pt.localScale != platform.nextScale)
             {
                 platform.pt.position = Vector3.MoveTowards(platform.pt.position, platform.nextPosition, GameConfig.PLATFORM_MOVING_SPEED * Time.deltaTime);

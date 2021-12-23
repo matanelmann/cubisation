@@ -7,7 +7,7 @@ public class Level : MonoBehaviour
     public static Level instance;
     public int LevelNum;
     public LevelSettings.GameSet ST;
-    private CubesController cc;
+    public CubesController cc;
     private Platform platform;
     private PlatformMover pm;
 
@@ -76,7 +76,7 @@ public class Level : MonoBehaviour
     public void spawnNewPlayer()
     {
         if (cc.RedCubes.Count < 2) {
-            cc.CreateCube(Cube.Type.Blue, new Vector3(GameConfig.LEFT_EDGE / 2f, platform.pt.position.y + 100f + cc.GetLast(Cube.Type.Red).length / 2), Vector3.one * cc.GetLast(Cube.Type.Red).scale);
+            cc.CreateCube(Cube.Type.Blue, new Vector3(GameConfig.LEFT_EDGE / 2f, GameConfig.GROUND_Y + cc.GetLast(Cube.Type.Red).length / 2), Vector3.one * cc.GetLast(Cube.Type.Red).scale);
         } else 
         {
             cc.CreateCube(Cube.Type.Blue, new Vector3(GameConfig.LEFT_EDGE / 2f, platform.pt.position.y + cc.GetLast(Cube.Type.Red).length / 2), Vector3.one * cc.GetLast(Cube.Type.Red).scale);
