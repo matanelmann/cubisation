@@ -72,6 +72,7 @@ public class GameHandler : MonoBehaviour
         active = false;
         sound.LevelPassed();
         Debug.Log("Level Passed");
+        NextLevel.instance.passToNextLevel();
     }
 
     public bool isGameActive()
