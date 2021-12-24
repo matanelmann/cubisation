@@ -17,13 +17,17 @@ public class GameHandler : MonoBehaviour
         Init();
     }
 
-    // Temporary:
-    
     private void Start()
     {
-        StartGame(); // Should later on be called from the main menu at first!
+        StartGame();
     }
-    
+
+    private void StartGame()
+    {
+        active = true;
+        level.StartLevel(CrossSceneInfo.ChosenLevel);
+    }
+
     public static GameHandler GetInstance()
     {
         return Instance;
@@ -34,13 +38,6 @@ public class GameHandler : MonoBehaviour
         active = false;
         level = Level.GetInstance();
         CubesController.GetInstance().Init();
-    }
-
-    public void StartGame()
-    {
-        SceneManager.LoadScene(1);
-        active = true;
-        Level.GetInstance().StartLevel(0);
     }
 
     void Update()
@@ -72,7 +69,7 @@ public class GameHandler : MonoBehaviour
         active = false;
         sound.LevelPassed();
         Debug.Log("Level Passed");
-        NextLevel.instance.passToNextLevel();
+        //NextLevel.instance.passToNextLevel();
     }
 
     public bool isGameActive()

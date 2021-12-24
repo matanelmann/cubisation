@@ -5,7 +5,7 @@ using UnityEngine;
 public class SoundManager : MonoBehaviour
 {
     public static SoundManager instance;
-    public AudioSource clack, victory;
+    public AudioSource clack, victory, buttonTap;
 
     private void Awake()
     {
@@ -25,6 +25,11 @@ public class SoundManager : MonoBehaviour
     public void LevelPassed()
     {
         victory.Play();
+    }
+
+    public void ButtonTap()
+    {
+        buttonTap.Play();
     }
     
 }

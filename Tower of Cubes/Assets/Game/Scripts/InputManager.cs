@@ -34,9 +34,4 @@ public class InputManager : MonoBehaviour
             TrajectoryLine.EndLine();
         }
     }
-
-    public void PlayButton()
-    {
-        gameObject.GetComponent<GameHandler>().StartGame();
-    }
 }
