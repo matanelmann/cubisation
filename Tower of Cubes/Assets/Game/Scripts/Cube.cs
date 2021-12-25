@@ -12,9 +12,11 @@ public class Cube
     public Rigidbody2D rb;
     public bool MouseOver;
     private float initial_Y;
+    private float initial_X;
     private CubesController cc;
     public Cube prevCube;
     private SoundManager sound;
+    public bool allowCollision = true;
 
     // Constructor
     public Cube(Transform cubeTransform, Type type, Vector3 position, Vector3 scale, CubesController cc, SoundManager sound)
@@ -28,6 +30,7 @@ public class Cube
         this.scale = scale.x;
         this.length = scale.x * 5.12f;
         this.initial_Y = cubeTransform.position.y;
+        this.initial_X = cubeTransform.position.x;
         this.rb = cubeTransform.gameObject.GetComponent<Rigidbody2D>();
         this.MouseOver = false;
         this.sound = sound;
@@ -55,7 +58,7 @@ public class Cube
     // Relevant for Blue cubes only
     public void OnCollision(Collision2D col)
     {
-        if (isMain() && GameHandler.GetInstance().isGameActive())
+        if (isMain() && allowCollision && GameHandler.GetInstance().isGameActive())
         {
             if (!Level.GetInstance().TowerEmpty() && col.transform == cc.GetMainRed().cubeTransform)
             {
@@ -83,6 +86,6 @@ public class Cube
 
     public bool OffTower()
     {
-        return (gameObj == null || cubeTransform.position.y < initial_Y - length); // If the cube fell down from the tower
+        return (gameObj == null || cubeTransform.position.y < initial_Y - length || (cc.RedCubes.Count == 1 &&  this == cc.RedCubes[0] && cubeTransform.position.x > initial_X + length)); // If the cube fell down from the tower
     }
 }

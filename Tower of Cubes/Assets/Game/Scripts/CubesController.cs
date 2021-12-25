@@ -8,7 +8,8 @@ public class CubesController : MonoBehaviour
     private static SoundManager sound;
     [HideInInspector] public List<Cube> BlueCubes, RedCubes;
     private Cube mainBlue;
-    private Cube mainRed, secondaryRed;
+    private Cube mainRed;
+    private Cube temp;
 
     private void Awake()
     {
@@ -46,10 +47,6 @@ public class CubesController : MonoBehaviour
         else
         {
             newCube = new Cube(Instantiate(GameAssets.instance.redCube, GameConfig.GameTransform), type, position, scale, instance, sound);
-            if (RedCubes.Count > 0)
-            {
-                secondaryRed = mainRed;
-            }
             mainRed = newCube;
             RedCubes.Add(newCube);
         }
@@ -127,6 +124,7 @@ public class CubesController : MonoBehaviour
     {
         if (mainRed != null && mainRed.OffTower())
         {
+            mainBlue.allowCollision = false;
             mainRed = mainRed.prevCube;
         }
     }
@@ -140,7 +138,8 @@ public class CubesController : MonoBehaviour
 
     public void StartPhaseCompletionTimer()
     {
-        Invoke("ReportPhaseCompletion", 2.5f);
+        temp = mainRed;
+        Invoke("ReportPhaseCompletion", 2.3f);
     }
 
     private void ReportPhaseCompletion()
@@ -149,7 +148,7 @@ public class CubesController : MonoBehaviour
         {
             GameHandler.GetInstance().LevelPassed();
         }
-        else
+        else if (temp != mainRed)
         {
             Level.GetInstance().MovePlatform();
         }

@@ -9,18 +9,20 @@ public class InputManager : MonoBehaviour
     private Vector3 dragStartPos;
     private Vector3 dragEndPos;
     private Vector3 mousePos;
+    private Vector3 cubeSide;
     public void Check()
     {
         mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0, 0, 1);
         Cube mainBlue = CubesController.GetInstance().GetMainBlue();
-        if (Input.GetMouseButtonDown(0) && mainBlue.MouseOver)
+        cubeSide = mainBlue.cubeTransform.position + new Vector3(0, mainBlue.length / 2);
+        if (Input.GetMouseButtonDown(0))
         {
             dragStartPos = mousePos;
             dragging = true;
         }
         if (dragging && Input.GetMouseButton(0))
         {
-            TrajectoryLine.RenderLine(dragStartPos, mousePos);
+            TrajectoryLine.RenderLine(cubeSide, cubeSide - new Vector3(dragStartPos.x - mousePos.x, 0));
         }
         if (dragging && Input.GetMouseButtonUp(0))
         {
