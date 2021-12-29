@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class MainMenu : MonoBehaviour
 {
@@ -12,6 +13,11 @@ public class MainMenu : MonoBehaviour
     {
         sound.ButtonTap();
         loader.SwitchPanels();
+    }
+
+    public void disablePlayButton()
+    {
+        // To do
     }
 
     public void Level_1_Button()
