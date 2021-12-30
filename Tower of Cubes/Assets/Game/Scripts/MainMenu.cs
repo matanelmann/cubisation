@@ -48,5 +48,12 @@ public class MainMenu : MonoBehaviour
         loader.LoadGame();
     }
 
+    public void Level_5_Button()
+    {
+        sound.ButtonTap();
+        CrossSceneInfo.ChosenLevel = 5;
+        loader.LoadGame();
+    }
+
 
 }

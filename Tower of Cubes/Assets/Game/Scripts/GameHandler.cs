@@ -8,6 +8,7 @@ public class GameHandler : MonoBehaviour
     public static GameHandler Instance;
     public InputManager input;
     public SoundManager sound;
+    public WindowManager wm;
     private Level level;
     private bool active = false;
 
@@ -34,7 +35,6 @@ public class GameHandler : MonoBehaviour
     }
 
     private void Init() {
-        Debug.Log("Init of GameHandler");
         active = false;
         level = Level.GetInstance();
         CubesController.GetInstance().Init();
@@ -48,28 +48,44 @@ public class GameHandler : MonoBehaviour
         }
     }
 
+    public void PauseGame()
+    {
+        if (active)
+        {
+            active = false;
+            input.Reset();
+            wm.ShowPause();
+        }
+    }
+
+    public void ResumeGame()
+    {
+        wm.Clear();
+        active = true;
+    }
+
     public void Restart()
     {
         active = false;
         DestroyObjects();
+        wm.Clear();
         StartGame();
     }
 
     public void GameOver()
     {
-        // To-do
         level.cc.CancelInvoke();
         active = false;
+        wm.ShowGameOver();
         Debug.Log("Game Over");
     }
 
     public void LevelPassed()
     {
-        // To-do
         active = false;
         sound.LevelPassed();
+        wm.ShowLevelPassed();
         Debug.Log("Level Passed");
-        //NextLevel.instance.passToNextLevel();
     }
 
     public bool isGameActive()

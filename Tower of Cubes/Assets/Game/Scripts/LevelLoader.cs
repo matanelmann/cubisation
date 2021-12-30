@@ -30,9 +30,39 @@ public class LevelLoader : MonoBehaviour
         transition.SetTrigger("End");
     }
 
+    public void ReloadLevel()
+    {
+        transition.SetTrigger("Start");
+        Invoke("reloadLevel", 0.5f);
+    }
+
+    private void reloadLevel()
+    {
+        GameHandler.GetInstance().Restart();
+        transition.SetTrigger("End");
+    }
+
+    public void LoadNextLevel()
+    {
+        if (CrossSceneInfo.ChosenLevel == 5)
+        {
+            CrossSceneInfo.ChosenLevel = 1;
+        }
+        else
+        {
+            CrossSceneInfo.ChosenLevel++;
+        }
+        ReloadLevel();
+    }
+
     public void LoadGame()
     {
         StartCoroutine(loadGame());
+    }
+
+    public void LoadMenu()
+    {
+        StartCoroutine(loadMenu());
     }
 
     IEnumerator loadGame()
@@ -40,5 +70,12 @@ public class LevelLoader : MonoBehaviour
         transition.SetTrigger("Start");
         yield return new WaitForSeconds(1f);
         SceneManager.LoadScene(1);
+    }
+
+    IEnumerator loadMenu()
+    {
+        transition.SetTrigger("Start");
+        yield return new WaitForSeconds(1f);
+        SceneManager.LoadScene(0);
     }
 }
