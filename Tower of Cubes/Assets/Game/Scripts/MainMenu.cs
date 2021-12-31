@@ -24,6 +24,7 @@ public class MainMenu : MonoBehaviour
     {
         sound.ButtonTap();
         CrossSceneInfo.ChosenLevel = 1;
+        //Tutorial activate
         loader.LoadGame();
     }
 
