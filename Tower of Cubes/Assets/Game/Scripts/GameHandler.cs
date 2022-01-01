@@ -9,6 +9,7 @@ public class GameHandler : MonoBehaviour
     public InputManager input;
     public SoundManager sound;
     public WindowManager wm;
+    public TutorialManager tm;
     private Level level;
     private bool active = false;
 
@@ -86,6 +87,32 @@ public class GameHandler : MonoBehaviour
         sound.LevelPassed();
         wm.ShowLevelPassed();
         Debug.Log("Level Passed");
+    }
+
+    public void firstInstructions()
+    {
+        active = false;
+        tm.ShowFirstInstructions();
+        Debug.Log("first instructions");
+    }
+
+     public void tooStrong()
+    {
+        active = false;
+        tm.ShowTooStorng();
+        Debug.Log("too Strong");
+    }
+     public void graetJob()
+    {
+        active = false;
+        tm.ShowGreatJob();
+        Debug.Log("great job");
+    }
+     public void finishTutorial()
+    {
+        active = false;
+        tm.ShowFirstInstructions();
+        Debug.Log("finish");
     }
 
     public bool isGameActive()

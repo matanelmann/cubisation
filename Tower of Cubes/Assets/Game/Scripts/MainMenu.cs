@@ -9,8 +9,18 @@ public class MainMenu : MonoBehaviour
     public SoundManager sound;
     public LevelLoader loader;
 
+    public static bool playButton;
+
     public void PlayButton()
     {
+        playButton = true;
+        sound.ButtonTap();
+        loader.SwitchPanels();
+    }
+
+    public void TutorialButton() 
+    {
+        Tutorial.instance.activateTutorial();
         sound.ButtonTap();
         loader.SwitchPanels();
     }
@@ -18,6 +28,14 @@ public class MainMenu : MonoBehaviour
     public void disablePlayButton()
     {
         // To do
+    }
+
+    public void Tutorial_next_Button()
+    {
+        sound.ButtonTap();
+        CrossSceneInfo.ChosenLevel = 1;
+        //Tutorial activate
+        loader.LoadGame();
     }
 
     public void Level_1_Button()

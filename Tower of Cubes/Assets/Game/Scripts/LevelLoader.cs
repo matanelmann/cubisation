@@ -9,6 +9,8 @@ public class LevelLoader : MonoBehaviour
     public GameObject mainPanel;
     public GameObject levelsPanel;
 
+    public GameObject tutorialPanel;
+
     public void SwitchPanels()
     {
         transition.SetTrigger("Start");
@@ -17,10 +19,16 @@ public class LevelLoader : MonoBehaviour
 
     private void switchPanels()
     {
-        if (mainPanel.activeInHierarchy)
+        if (mainPanel.activeInHierarchy && MainMenu.playButton)
         {
             mainPanel.SetActive(false);
             levelsPanel.SetActive(true);
+            MainMenu.playButton = false;
+        }
+        else if (mainPanel.activeInHierarchy && Tutorial.Getactive())
+        {
+            mainPanel.SetActive(false);
+            tutorialPanel.SetActive(true);
         }
         else
         {
