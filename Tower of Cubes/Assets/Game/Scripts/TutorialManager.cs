@@ -9,6 +9,12 @@ public class TutorialManager : MonoBehaviour
     public GameObject tooStorngPanel;
     public GameObject greatJobPanel;
     public GameObject FinishPanel;
+
+    public static TutorialManager instance; 
+    private void Awake()
+    {
+        instance = this;
+    }
     
     public void ShowFirstInstructions()
     {
@@ -46,6 +52,7 @@ public class TutorialManager : MonoBehaviour
         tooStorngPanel.SetActive(false);
         greatJobPanel.SetActive(false);
         FinishPanel.SetActive(false);
+        GameHandler.Instance.active = true;
     }
 
     private void fadeIn()

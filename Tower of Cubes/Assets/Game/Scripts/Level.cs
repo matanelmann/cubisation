@@ -10,6 +10,7 @@ public class Level : MonoBehaviour
     public CubesController cc;
     private Platform platform;
     private PlatformMover pm;
+    private static bool tutorailRestart = false;
 
     private void Awake()
     {
@@ -33,17 +34,20 @@ public class Level : MonoBehaviour
         cc = CubesController.GetInstance();
     }
 
+        
     public void StartLevel(int LevelNum)
     {
+        tutorailRestart = !tutorailRestart;
+        if(Tutorial.isActive && tutorailRestart) 
+        {
+            GameHandler.Instance.firstInstructions();
+        }
+        
         init(LevelNum);
         buildTower();
         buildPlatform();
         spawnNewPlayer();
         
-        if(Tutorial.isActive) 
-        {
-            GameHandler.Instance.firstInstructions();
-        }
     }
 
     private void buildTower()

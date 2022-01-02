@@ -11,7 +11,7 @@ public class GameHandler : MonoBehaviour
     public WindowManager wm;
     public TutorialManager tm;
     private Level level;
-    private bool active = false;
+    public bool active = false;
 
     private void Awake()
     {
@@ -70,16 +70,21 @@ public class GameHandler : MonoBehaviour
         active = false;
         DestroyObjects();
         wm.Clear();
+        tm.Clear();
         StartGame();
     }
 
     public void GameOver()
     {
+        
+        if(!Tutorial.Getactive()) 
+        {
         TrajectoryLine.EndLine();
         level.cc.CancelInvoke();
         active = false;
         wm.ShowGameOver();
         Debug.Log("Game Over");
+        }
     }
 
     public void LevelPassed()

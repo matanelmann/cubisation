@@ -71,16 +71,16 @@ public class Cube
     public void Push(float force)
     {
         rb.AddForce(Vector2.right * Level.GetSettings().FORCE * force);
+        
+        if(Tutorial.Getactive()) {
+            TutorialManager.instance.Clear();
+        }
     }
 
     public bool outOfBounds()
     {
         // If the cube is out of screen bounds
         return (cubeTransform.position.x > GameConfig.RIGHT_EDGE + this.length || cubeTransform.position.x < GameConfig.LEFT_EDGE - this.length);
-    }
-    public bool cubeMoved()
-    {
-        return (cubeTransform.position.x > this.initial_X);
     }
 
     public bool isMain()

@@ -101,26 +101,22 @@ public class CubesController : MonoBehaviour
         List<Cube> removeList = new List<Cube>();
         foreach (Cube cube in cubes)
         {
-            if(cube.type == Cube.Type.Blue && cube.cubeMoved() && Tutorial.Getactive()) 
-            {
-                tm.Clear();
-            } 
             if (cube.outOfBounds())
-            {
-                removeList.Add(cube);
-                Destroy(cube.gameObj);
-            }
-            else if (cube.type == Cube.Type.Blue && cube.OffTower())
             {
                 if(Tutorial.Getactive())
                 {
-                    GameHandler.GetInstance().tooStrong();
                     GameHandler.GetInstance().Restart();
-                } 
-                else 
+                    Invoke("getTooStrong", 1f);
+                    GameHandler.GetInstance().tooStrong();
+                } else
                 {
-                    GameHandler.GetInstance().GameOver();
+                removeList.Add(cube);
+                Destroy(cube.gameObj);
                 }
+            }
+            else if (cube.type == Cube.Type.Blue && cube.OffTower())
+            {
+                GameHandler.GetInstance().GameOver();
             }
         }
         foreach (Cube cube in removeList)
@@ -184,5 +180,10 @@ public class CubesController : MonoBehaviour
         DestroyCubes(BlueCubes);
         DestroyCubes(RedCubes);
         CancelInvoke();
+    }
+
+    private void getTooStrong() 
+    {
+        GameHandler.GetInstance().tooStrong();
     }
 }
