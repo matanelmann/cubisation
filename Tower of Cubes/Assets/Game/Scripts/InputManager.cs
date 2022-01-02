@@ -22,7 +22,7 @@ public class InputManager : MonoBehaviour
         }
         if (dragging && Input.GetMouseButton(0) && dragStartPos.x - mousePos.x >= 1)
         {
-            TrajectoryLine.RenderLine(cubeSide, cubeSide - new Vector3(dragStartPos.x - mousePos.x, 0));
+            TrajectoryLine.RenderLine(cubeSide, cubeSide - new Vector3(dragStartPos.x - mousePos.x, 0), mainBlue);
         }
         if (dragging && Input.GetMouseButtonUp(0))
         {

@@ -10,8 +10,10 @@ public class TrajectoryLine : MonoBehaviour
     {
         lr = gameObject.GetComponent<LineRenderer>();
     }
-    public static void RenderLine(Vector3 startPoint, Vector3 endPoint)
+    public static void RenderLine(Vector3 startPoint, Vector3 endPoint, Cube mainBlue)
     {
+        lr.widthCurve = new AnimationCurve(new Keyframe(0.1f, mainBlue.scale), new Keyframe(0.2f, 0.0f));
+        lr.widthMultiplier = 5.12f;
         endPoint.y = startPoint.y;
         lr.positionCount = 2;
         Vector3[] points = new Vector3[2];

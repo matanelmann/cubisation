@@ -75,6 +75,7 @@ public class GameHandler : MonoBehaviour
 
     public void GameOver()
     {
+        TrajectoryLine.EndLine();
         level.cc.CancelInvoke();
         active = false;
         wm.ShowGameOver();
