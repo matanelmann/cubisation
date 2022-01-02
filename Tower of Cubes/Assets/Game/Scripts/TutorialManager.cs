@@ -14,7 +14,6 @@ public class TutorialManager : MonoBehaviour
     {
         firstInstructionsPanel.SetActive(true);
         fadeIn();
-        Invoke("stopTime", 0.55f);
     }
 
     public void ShowTooStorng()
