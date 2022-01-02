@@ -3433,7 +3433,7 @@ LineRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 0.5, g: 0.096698105, b: 0.096698105, a: 1}
+      key0: {r: 0.098039225, g: 0.84313726, b: 0.5019608, a: 1}
       key1: {r: 0.1738163, g: 0.5849056, b: 0.20801911, a: 1}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
@@ -3460,13 +3460,13 @@ LineRenderer:
       m_Mode: 0
       m_NumColorKeys: 2
       m_NumAlphaKeys: 3
-    numCornerVertices: 30
-    numCapVertices: 2
+    numCornerVertices: 0
+    numCapVertices: 0
     alignment: 0
     textureMode: 0
     shadowBias: 0.5
     generateLightingData: 0
-  m_UseWorldSpace: 1
+  m_UseWorldSpace: 0
   m_Loop: 0
 --- !u!114 &1400460811
 MonoBehaviour:
