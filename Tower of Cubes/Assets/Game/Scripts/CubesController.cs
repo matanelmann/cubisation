@@ -10,6 +10,7 @@ public class CubesController : MonoBehaviour
     private Cube mainBlue;
     private Cube mainRed;
     private Cube temp;
+    public TutorialManager tm;
 
     private void Awake()
     {
@@ -100,6 +101,10 @@ public class CubesController : MonoBehaviour
         List<Cube> removeList = new List<Cube>();
         foreach (Cube cube in cubes)
         {
+            if(cube.type == Cube.Type.Blue && cube.cubeMoved() && Tutorial.Getactive()) 
+            {
+                tm.Clear();
+            } 
             if (cube.outOfBounds())
             {
                 removeList.Add(cube);
@@ -107,7 +112,15 @@ public class CubesController : MonoBehaviour
             }
             else if (cube.type == Cube.Type.Blue && cube.OffTower())
             {
-                GameHandler.GetInstance().GameOver();
+                if(Tutorial.Getactive())
+                {
+                    GameHandler.GetInstance().tooStrong();
+                    GameHandler.GetInstance().Restart();
+                } 
+                else 
+                {
+                    GameHandler.GetInstance().GameOver();
+                }
             }
         }
         foreach (Cube cube in removeList)

@@ -39,6 +39,11 @@ public class Level : MonoBehaviour
         buildTower();
         buildPlatform();
         spawnNewPlayer();
+        
+        if(Tutorial.isActive) 
+        {
+            GameHandler.Instance.firstInstructions();
+        }
     }
 
     private void buildTower()

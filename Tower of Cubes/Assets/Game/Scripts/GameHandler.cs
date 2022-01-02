@@ -91,7 +91,7 @@ public class GameHandler : MonoBehaviour
 
     public void firstInstructions()
     {
-        active = false;
+        active = true;
         tm.ShowFirstInstructions();
         Debug.Log("first instructions");
     }
