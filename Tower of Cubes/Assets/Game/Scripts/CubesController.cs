@@ -101,19 +101,20 @@ public class CubesController : MonoBehaviour
         List<Cube> removeList = new List<Cube>();
         foreach (Cube cube in cubes)
         {
-            if (cube.outOfBounds())
+            if (cube.type == Cube.Type.Blue && cube.outOfBounds() && Tutorial.Getactive())
             {
-                if(Tutorial.Getactive())
-                {
-                    GameHandler.GetInstance().Restart();
-                    Invoke("getTooStrong", 1f);
-                    GameHandler.GetInstance().tooStrong();
-                } else
-                {
-                removeList.Add(cube);
-                Destroy(cube.gameObj);
-                }
+                GameHandler.GetInstance().Restart();
+                Invoke("getTooStrong", 1f);
+                GameHandler.GetInstance().tooStrong();
             }
+
+                
+            else if (cube.outOfBounds())
+            {
+            removeList.Add(cube);
+            Destroy(cube.gameObj);
+            }
+            
             else if (cube.type == Cube.Type.Blue && cube.OffTower())
             {
                 GameHandler.GetInstance().GameOver();

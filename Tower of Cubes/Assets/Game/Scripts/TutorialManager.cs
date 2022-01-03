@@ -17,7 +17,8 @@ public class TutorialManager : MonoBehaviour
     }
     
     public void ShowFirstInstructions()
-    {
+    {   
+
         firstInstructionsPanel.SetActive(true);
         fadeIn();
     }
@@ -33,7 +34,7 @@ public class TutorialManager : MonoBehaviour
         greatJobPanel.SetActive(true);
         fadeIn();
     }
-    public void FinishJob()
+    public void ShowFinishJob()
     {
         FinishPanel.SetActive(true);
         fadeIn();

@@ -117,7 +117,7 @@ public class GameHandler : MonoBehaviour
      public void finishTutorial()
     {
         active = false;
-        tm.ShowFirstInstructions();
+        tm.ShowFinishJob();
         Debug.Log("finish");
     }
 

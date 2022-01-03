@@ -1280,6 +1280,7 @@ MonoBehaviour:
   sound: {fileID: 639512487}
   wm: {fileID: 639512488}
   tm: {fileID: 639512489}
+  active: 0
 --- !u!4 &639512482
 Transform:
   m_ObjectHideFlags: 0

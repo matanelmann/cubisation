@@ -42,7 +42,6 @@ public class Level : MonoBehaviour
         {
             GameHandler.Instance.firstInstructions();
         }
-        
         init(LevelNum);
         buildTower();
         buildPlatform();
