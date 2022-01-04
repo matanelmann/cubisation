@@ -11,12 +11,13 @@ public class GameHandler : MonoBehaviour
     public WindowManager wm;
     public TutorialManager tm;
     private Level level;
-    public bool active = false;
+    private bool active = false;
 
     private void Awake()
     {
         Instance = this;
         Init();
+        sound.PlayLevelBackground();
     }
 
     private void Start()

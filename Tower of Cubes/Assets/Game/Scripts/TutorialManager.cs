@@ -56,7 +56,6 @@ public class TutorialManager : MonoBehaviour
         tooStrongPanel.SetActive(false);
         greatJobPanel.SetActive(false);
         FinishPanel.SetActive(false);
-        GameHandler.Instance.active = true;
     }
 
     private void fadeIn()
