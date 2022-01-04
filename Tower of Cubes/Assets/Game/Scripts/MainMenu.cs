@@ -25,15 +25,10 @@ public class MainMenu : MonoBehaviour
         loader.SwitchPanels();
     }
 
-    public void disablePlayButton()
-    {
-        // To do
-    }
-
     public void Tutorial_next_Button()
     {
         sound.ButtonTap();
-        CrossSceneInfo.ChosenLevel = 1;
+        CrossSceneInfo.ChosenLevel = 0;
         //Tutorial activate
         loader.LoadGame();
     }

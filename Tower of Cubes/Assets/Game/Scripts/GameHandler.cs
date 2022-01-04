@@ -98,14 +98,14 @@ public class GameHandler : MonoBehaviour
     public void firstInstructions()
     {
         active = true;
-        tm.ShowFirstInstructions();
+        tm.ShowFirstInstructions(level.cc.GetMainBlue());
         Debug.Log("first instructions");
     }
 
      public void tooStrong()
     {
         active = false;
-        tm.ShowTooStorng();
+        tm.ShowTooStrong();
         Debug.Log("too Strong");
     }
      public void graetJob()

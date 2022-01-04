@@ -6,26 +6,28 @@ public class TutorialManager : MonoBehaviour
 {
     public Animation anim;
     public GameObject firstInstructionsPanel;
-    public GameObject tooStorngPanel;
+    public GameObject tooStrongPanel;
     public GameObject greatJobPanel;
     public GameObject FinishPanel;
+    private Transform finger;
 
-    public static TutorialManager instance; 
+    public static TutorialManager instance;
     private void Awake()
     {
         instance = this;
+        finger = firstInstructionsPanel.transform.GetChild(0); // Get the finger's transform
     }
-    
-    public void ShowFirstInstructions()
-    {   
 
+    public void ShowFirstInstructions(Cube mainBlue)
+    {   
         firstInstructionsPanel.SetActive(true);
+        finger.position = new Vector3(mainBlue.cubeTransform.position.x, mainBlue.cubeTransform.position.y);
         fadeIn();
     }
 
-    public void ShowTooStorng()
+    public void ShowTooStrong()
     {
-        tooStorngPanel.SetActive(true);
+        tooStrongPanel.SetActive(true);
         fadeIn();
     }
 
@@ -43,6 +45,7 @@ public class TutorialManager : MonoBehaviour
     public void Clear()
     {
         Time.timeScale = 1;
+        finger.GetChild(0).GetComponent<Animation>().Stop();
         fadeOut();
         Invoke("clear", 0.5f);
     }
@@ -50,7 +53,7 @@ public class TutorialManager : MonoBehaviour
     private void clear()
     {
         firstInstructionsPanel.SetActive(false);
-        tooStorngPanel.SetActive(false);
+        tooStrongPanel.SetActive(false);
         greatJobPanel.SetActive(false);
         FinishPanel.SetActive(false);
         GameHandler.Instance.active = true;

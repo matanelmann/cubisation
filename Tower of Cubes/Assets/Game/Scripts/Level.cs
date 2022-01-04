@@ -38,15 +38,15 @@ public class Level : MonoBehaviour
     public void StartLevel(int LevelNum)
     {
         tutorailRestart = !tutorailRestart;
-        if(Tutorial.isActive && tutorailRestart) 
-        {
-            GameHandler.Instance.firstInstructions();
-        }
         init(LevelNum);
         buildTower();
         buildPlatform();
         spawnNewPlayer();
-        
+        if (Tutorial.isActive && tutorailRestart)
+        {
+            GameHandler.Instance.firstInstructions();
+        }
+
     }
 
     private void buildTower()

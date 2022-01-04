@@ -8,7 +8,9 @@ public class LevelSettings : MonoBehaviour
     private void Awake()
     {
         GsList = new List<GameSet>();
-        // Level 1 (Tutorial)
+        // Level 0 (Tutorial)
+        GsList.Add(new GameSet(new Dictionary<string, float>() { { "TOWER_HEIGHT", 2f }, { "CUBE_ROOT_SCALE", 2.5f }, { "FORCE", 600f }, { "GRAVITY", 4f }, { "MASS", 3f }, { "FRICTION", 0.1f }, { "BOUNCINESS", 0.3f }, { "SCALE_DECREASE_RATE", 0.85f } }));
+        // Level 1
         GsList.Add(new GameSet(new Dictionary<string, float>() { { "TOWER_HEIGHT", 3f }, { "CUBE_ROOT_SCALE", 2f }, { "FORCE", 600f }, { "GRAVITY", 4f }, { "MASS", 3f }, { "FRICTION", 0.1f }, { "BOUNCINESS", 0.3f }, { "SCALE_DECREASE_RATE", 0.8f } }));
         // Level 2
         GsList.Add(new GameSet(new Dictionary<string, float>() { { "TOWER_HEIGHT", 4f }, { "CUBE_ROOT_SCALE", 2f }, { "FORCE", 600f }, { "GRAVITY", 4f }, { "MASS", 3f }, { "FRICTION", 0.1f }, { "BOUNCINESS", 0.3f }, { "SCALE_DECREASE_RATE", 0.8f } }));
@@ -26,7 +28,7 @@ public class LevelSettings : MonoBehaviour
         {
             return GsList[0];
         }
-        return GsList[LevelNum - 1];
+        return GsList[LevelNum];
     }
 
     public class GameSet
