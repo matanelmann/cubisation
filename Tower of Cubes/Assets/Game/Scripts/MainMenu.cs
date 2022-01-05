@@ -74,7 +74,7 @@ public class MainMenu : MonoBehaviour
 
     public void adjustCapButton() 
     {
-        for (int i = 0; i < UnlockLevel.instance.getCompletedLevels(); i++)
+        for (int i = 0; i < PlayerPrefs.GetInt("level", 0); i++)
         {
             levelButton[i].interactable = true;
         }

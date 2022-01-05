@@ -1479,7 +1479,6 @@ GameObject:
   - component: {fileID: 973625719}
   - component: {fileID: 973625722}
   - component: {fileID: 973625721}
-  - component: {fileID: 973625723}
   m_Layer: 0
   m_Name: MainMenu
   m_TagString: Untagged
@@ -1633,18 +1632,6 @@ MonoBehaviour:
   victory: {fileID: 0}
   buttonTap: {fileID: 973625721}
   levelBackground: {fileID: 0}
---- !u!114 &973625723
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 973625718}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0315852fd67cf974a92d2dbf8ff0b564, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &987120902
 GameObject:
   m_ObjectHideFlags: 0

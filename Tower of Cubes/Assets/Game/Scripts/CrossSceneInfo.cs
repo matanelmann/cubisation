@@ -5,4 +5,5 @@ using UnityEngine;
 public static class CrossSceneInfo
 {
     public static int ChosenLevel { get; set; }
+    
 }

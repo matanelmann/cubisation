@@ -10,7 +10,6 @@ public class GameHandler : MonoBehaviour
     public SoundManager sound;
     public WindowManager wm;
     public TutorialManager tm;
-    public UnlockLevel ul;
     private Level level;
     private bool active = false;
 
@@ -112,7 +111,7 @@ public class GameHandler : MonoBehaviour
         active = false;
         //sound.LevelPassed();
         wm.ShowLevelPassed();
-        ul.unlockLevel(CrossSceneInfo.ChosenLevel);
+        PlayerPrefs.SetInt("level", CrossSceneInfo.ChosenLevel);
         Debug.Log("Level Passed");
     }
 
