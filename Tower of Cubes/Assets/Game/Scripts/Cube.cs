@@ -71,7 +71,8 @@ public class Cube
     public void Push(float force)
     {
         rb.AddForce(Vector2.right * Level.GetSettings().FORCE * force);
-        if(Tutorial.GetActive()) {
+        if (CrossSceneInfo.inTutorial && GameHandler.GetInstance().isGameActive())
+        {
             TutorialManager.instance.Clear();
         }
     }
@@ -89,6 +90,6 @@ public class Cube
 
     public bool OffTower()
     {
-        return (gameObj == null || cubeTransform.position.y < initial_Y - length || (cc.RedCubes.Count == 1 &&  this == cc.RedCubes[0] && cubeTransform.position.x > initial_X + length)); // If the cube fell down from the tower
+        return (gameObj == null || cubeTransform.position.y < initial_Y - length || (cc.RedCubes.Count == 1 && this == cc.RedCubes[0] && cubeTransform.position.x > initial_X + length)); // If the cube fell down from the tower
     }
 }

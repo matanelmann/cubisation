@@ -8,16 +8,14 @@ public class MainMenu : MonoBehaviour
 {
     public SoundManager sound;
     public LevelLoader loader;
-
     public static bool playButton;
-
     public List<Button> levelButton;
 
     public void PlayButton()
     {
-        if(PlayerPrefs.GetInt("level", 0) == 0) 
+        if(PlayerPrefs.GetInt("level", 0) == 0)
         {
-            Tutorial.instance.ActivateTutorial();
+            CrossSceneInfo.inTutorial = true;
             sound.ButtonTap();
             loader.SwitchPanels();
         } 
@@ -29,13 +27,6 @@ public class MainMenu : MonoBehaviour
             loader.SwitchPanels();
         }
     }
-
-    // public void TutorialButton()
-    // {
-    //     Tutorial.instance.ActivateTutorial();
-    //     sound.ButtonTap();
-    //     loader.SwitchPanels();
-    // }
 
     public void Tutorial_next_Button()
     {

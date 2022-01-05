@@ -10,6 +10,7 @@ public class GameHandler : MonoBehaviour
     public SoundManager sound;
     public WindowManager wm;
     public TutorialManager tm;
+    public GameObject pauseButton;
     private Level level;
     private bool active = false;
 
@@ -27,6 +28,7 @@ public class GameHandler : MonoBehaviour
     private void StartGame()
     {
         active = true;
+        pauseButton.SetActive(!CrossSceneInfo.inTutorial);
         level.StartLevel(CrossSceneInfo.ChosenLevel);
     }
 
@@ -81,24 +83,9 @@ public class GameHandler : MonoBehaviour
         level.cc.CancelInvoke();
         active = false;
         Debug.Log("Game Over");
-        if (Tutorial.GetActive())
+        if (CrossSceneInfo.inTutorial)
         {
-            Cube mainBlue = level.cc.GetMainBlue();
-            if (mainBlue.OffTower())
-            {
-                if (mainBlue.cubeTransform.position.x <= GameConfig.TOWER_X)
-                {
-                    // tm.ShowTooWeak()
-                }
-                else
-                {
-                    tm.ShowTooStrong();
-                }
-            }
-            else
-            {
-                //tm.showBlueCubes();
-            }
+            tm.ShowBlueCubes();
         }
         else
         {
@@ -111,7 +98,11 @@ public class GameHandler : MonoBehaviour
         active = false;
         //sound.LevelPassed();
         wm.ShowLevelPassed();
-        PlayerPrefs.SetInt("level", CrossSceneInfo.ChosenLevel +1 );
+        PlayerPrefs.SetInt("level", CrossSceneInfo.ChosenLevel + 1);
+        if (CrossSceneInfo.inTutorial)
+        {
+            CrossSceneInfo.inTutorial = false;
+        }
         Debug.Log("Level Passed");
     }
 

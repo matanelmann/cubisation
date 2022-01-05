@@ -7,7 +7,6 @@ public class TutorialManager : MonoBehaviour
     public Animation anim;
     public GameObject firstInstructionsPanel;
     public GameObject tooStrongPanel;
-    public GameObject tooWeakPanel;
     public GameObject blueCubesPanel;
     public GameObject greatJobPanel;
     public GameObject FinishPanel;
@@ -33,11 +32,6 @@ public class TutorialManager : MonoBehaviour
         fadeIn();
     }
 
-    public void ShowTooWeak()
-    {
-        tooWeakPanel.SetActive(true);
-        fadeIn();
-    }
     public void ShowBlueCubes()
     {
         blueCubesPanel.SetActive(true);

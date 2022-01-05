@@ -104,6 +104,10 @@ public class CubesController : MonoBehaviour
         {
             if (cube.outOfBounds())
             {
+                if (cube.type == Cube.Type.Blue)
+                {
+                    GameHandler.GetInstance().GameOver();
+                }
                 removeList.Add(cube);
                 Destroy(cube.gameObj);
             }
@@ -141,7 +145,7 @@ public class CubesController : MonoBehaviour
     public void StartPhaseCompletionTimer()
     {
         temp = mainRed;
-        Invoke("ReportPhaseCompletion", 2.3f);
+        Invoke("ReportPhaseCompletion", 2f);
     }
 
     private void ReportPhaseCompletion()

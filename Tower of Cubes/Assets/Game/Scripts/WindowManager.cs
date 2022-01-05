@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class WindowManager : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class WindowManager : MonoBehaviour
     public GameObject pausePanel;
     public GameObject levelPassedPanel;
     public GameObject gameOverPanel;
+    public Button restartButton;
     
     public void ShowPause()
     {
@@ -18,6 +20,10 @@ public class WindowManager : MonoBehaviour
 
     public void ShowLevelPassed()
     {
+        if (CrossSceneInfo.inTutorial)
+        {
+            restartButton.interactable = false;
+        }
         levelPassedPanel.SetActive(true);
         fadeIn();
     }

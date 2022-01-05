@@ -41,7 +41,7 @@ public class Level : MonoBehaviour
         buildTower();
         buildPlatform();
         spawnNewPlayer();
-        if (Tutorial.GetActive() && !tutorialRestart)
+        if (CrossSceneInfo.inTutorial && !tutorialRestart)
         {
             GameHandler.Instance.firstInstructions();
             tutorialRestart = true;
@@ -88,6 +88,10 @@ public class Level : MonoBehaviour
         } else 
         {
             cc.CreateCube(Cube.Type.Blue, new Vector3(GameConfig.LEFT_EDGE / 2f, platform.pt.position.y + cc.GetLast(Cube.Type.Red).length / 2), Vector3.one * cc.GetLast(Cube.Type.Red).scale);
+        }
+        if (CrossSceneInfo.inTutorial && cc.BlueCubes.Count > 1)
+        {
+            cc.tm.ShowGreatJob();
         }
     }
 

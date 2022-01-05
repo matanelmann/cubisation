@@ -25,7 +25,7 @@ public class LevelLoader : MonoBehaviour
             levelsPanel.SetActive(true);
             MainMenu.playButton = false;
         }
-        else if (mainPanel.activeInHierarchy && Tutorial.GetActive())
+        else if (mainPanel.activeInHierarchy && CrossSceneInfo.inTutorial)
         {
             mainPanel.SetActive(false);
             tutorialPanel.SetActive(true);
