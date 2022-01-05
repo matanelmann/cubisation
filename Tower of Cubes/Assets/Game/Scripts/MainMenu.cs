@@ -15,18 +15,27 @@ public class MainMenu : MonoBehaviour
 
     public void PlayButton()
     {
-        playButton = true;
-        sound.ButtonTap();
-        adjustCapButton();
-        loader.SwitchPanels();
+        if(PlayerPrefs.GetInt("level", 0) == 0) 
+        {
+            Tutorial.instance.ActivateTutorial();
+            sound.ButtonTap();
+            loader.SwitchPanels();
+        } 
+        else 
+        {
+            playButton = true;
+            sound.ButtonTap();
+            adjustCapButton();
+            loader.SwitchPanels();
+        }
     }
 
-    public void TutorialButton()
-    {
-        Tutorial.instance.ActivateTutorial();
-        sound.ButtonTap();
-        loader.SwitchPanels();
-    }
+    // public void TutorialButton()
+    // {
+    //     Tutorial.instance.ActivateTutorial();
+    //     sound.ButtonTap();
+    //     loader.SwitchPanels();
+    // }
 
     public void Tutorial_next_Button()
     {
@@ -74,7 +83,8 @@ public class MainMenu : MonoBehaviour
 
     public void adjustCapButton() 
     {
-        for (int i = 0; i < PlayerPrefs.GetInt("level", 0); i++)
+        int level = PlayerPrefs.GetInt("level", 0);
+        for (int i = 0; i < level; i++)
         {
             levelButton[i].interactable = true;
         }

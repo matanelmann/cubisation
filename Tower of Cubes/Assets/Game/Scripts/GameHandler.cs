@@ -111,7 +111,7 @@ public class GameHandler : MonoBehaviour
         active = false;
         //sound.LevelPassed();
         wm.ShowLevelPassed();
-        PlayerPrefs.SetInt("level", CrossSceneInfo.ChosenLevel);
+        PlayerPrefs.SetInt("level", CrossSceneInfo.ChosenLevel +1 );
         Debug.Log("Level Passed");
     }
 
