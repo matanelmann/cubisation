@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
-
+using UnityEngine.UI;
 public class MainMenu : MonoBehaviour
 {
     public SoundManager sound;
@@ -11,10 +11,13 @@ public class MainMenu : MonoBehaviour
 
     public static bool playButton;
 
+    public List<Button> levelButton;
+
     public void PlayButton()
     {
         playButton = true;
         sound.ButtonTap();
+        adjustCapButton();
         loader.SwitchPanels();
     }
 
@@ -68,6 +71,15 @@ public class MainMenu : MonoBehaviour
         CrossSceneInfo.ChosenLevel = 5;
         loader.LoadGame();
     }
+
+    public void adjustCapButton() 
+    {
+        for (int i = 0; i < UnlockLevel.instance.getCompletedLevels(); i++)
+        {
+            levelButton[i].interactable = true;
+        }
+    }
+
 
 
 }
