@@ -71,8 +71,7 @@ public class Cube
     public void Push(float force)
     {
         rb.AddForce(Vector2.right * Level.GetSettings().FORCE * force);
-        
-        if(Tutorial.Getactive()) {
+        if(Tutorial.GetActive()) {
             TutorialManager.instance.Clear();
         }
     }

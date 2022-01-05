@@ -7,6 +7,8 @@ public class TutorialManager : MonoBehaviour
     public Animation anim;
     public GameObject firstInstructionsPanel;
     public GameObject tooStrongPanel;
+    public GameObject tooWeakPanel;
+    public GameObject blueCubesPanel;
     public GameObject greatJobPanel;
     public GameObject FinishPanel;
     private Transform finger;
@@ -19,7 +21,7 @@ public class TutorialManager : MonoBehaviour
     }
 
     public void ShowFirstInstructions(Cube mainBlue)
-    {   
+    {
         firstInstructionsPanel.SetActive(true);
         finger.position = new Vector3(mainBlue.cubeTransform.position.x, mainBlue.cubeTransform.position.y);
         fadeIn();
@@ -28,6 +30,17 @@ public class TutorialManager : MonoBehaviour
     public void ShowTooStrong()
     {
         tooStrongPanel.SetActive(true);
+        fadeIn();
+    }
+
+    public void ShowTooWeak()
+    {
+        tooWeakPanel.SetActive(true);
+        fadeIn();
+    }
+    public void ShowBlueCubes()
+    {
+        blueCubesPanel.SetActive(true);
         fadeIn();
     }
 

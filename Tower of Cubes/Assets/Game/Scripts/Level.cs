@@ -10,7 +10,7 @@ public class Level : MonoBehaviour
     public CubesController cc;
     private Platform platform;
     private PlatformMover pm;
-    private static bool tutorailRestart = false;
+    private static bool tutorialRestart = false;
 
     private void Awake()
     {
@@ -37,14 +37,14 @@ public class Level : MonoBehaviour
         
     public void StartLevel(int LevelNum)
     {
-        tutorailRestart = !tutorailRestart;
         init(LevelNum);
         buildTower();
         buildPlatform();
         spawnNewPlayer();
-        if (Tutorial.isActive && tutorailRestart)
+        if (Tutorial.GetActive() && !tutorialRestart)
         {
             GameHandler.Instance.firstInstructions();
+            tutorialRestart = true;
         }
 
     }
