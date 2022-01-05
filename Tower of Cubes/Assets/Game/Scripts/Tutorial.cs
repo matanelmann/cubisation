@@ -5,26 +5,25 @@ using UnityEngine;
 public class Tutorial : MonoBehaviour
 {
     public static Tutorial instance;
-
-    public static bool isActive;
+    private static bool active;
 
     private void Awake()
     {
         instance = this;
     }
 
-    public static bool Getactive()
+    public static bool GetActive()
     {
-        return isActive;
+        return active;
     }
     //activates the tutorial mode when tutorial button is pressed
-    public void activateTutorial() 
+    public void ActivateTutorial() 
     {
-        isActive = true;
+        active = true;
     }
     //deactivates the tutorial when toturial is complete
-    public void deactivateTutorial() 
+    public void DeactivateTutorial() 
     {
-        isActive = false;
+        active = false;
     }
 }

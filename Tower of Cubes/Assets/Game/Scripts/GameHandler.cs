@@ -18,7 +18,6 @@ public class GameHandler : MonoBehaviour
     {
         Instance = this;
         Init();
-        sound.PlayLevelBackground();
     }
 
     private void Start()
@@ -37,7 +36,8 @@ public class GameHandler : MonoBehaviour
         return Instance;
     }
 
-    private void Init() {
+    private void Init()
+    {
         active = false;
         level = Level.GetInstance();
         CubesController.GetInstance().Init();
@@ -78,21 +78,39 @@ public class GameHandler : MonoBehaviour
 
     public void GameOver()
     {
-        
-        if(!Tutorial.Getactive()) 
-        {
         TrajectoryLine.EndLine();
         level.cc.CancelInvoke();
         active = false;
-        wm.ShowGameOver();
         Debug.Log("Game Over");
+        if (Tutorial.GetActive())
+        {
+            Cube mainBlue = level.cc.GetMainBlue();
+            if (mainBlue.OffTower())
+            {
+                if (mainBlue.cubeTransform.position.x <= GameConfig.TOWER_X)
+                {
+                    // tm.ShowTooWeak()
+                }
+                else
+                {
+                    tm.ShowTooStrong();
+                }
+            }
+            else
+            {
+                //tm.showBlueCubes();
+            }
+        }
+        else
+        {
+            wm.ShowGameOver();
         }
     }
 
     public void LevelPassed()
     {
         active = false;
-        sound.LevelPassed();
+        //sound.LevelPassed();
         wm.ShowLevelPassed();
         ul.unlockLevel(CrossSceneInfo.ChosenLevel);
         Debug.Log("Level Passed");
@@ -105,19 +123,19 @@ public class GameHandler : MonoBehaviour
         Debug.Log("first instructions");
     }
 
-     public void tooStrong()
+    public void tooStrong()
     {
         active = false;
         tm.ShowTooStrong();
         Debug.Log("too Strong");
     }
-     public void graetJob()
+    public void graetJob()
     {
         active = false;
         tm.ShowGreatJob();
         Debug.Log("great job");
     }
-     public void finishTutorial()
+    public void finishTutorial()
     {
         active = false;
         tm.ShowFinishJob();

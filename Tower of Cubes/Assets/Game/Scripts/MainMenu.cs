@@ -21,9 +21,9 @@ public class MainMenu : MonoBehaviour
         loader.SwitchPanels();
     }
 
-    public void TutorialButton() 
+    public void TutorialButton()
     {
-        Tutorial.instance.activateTutorial();
+        Tutorial.instance.ActivateTutorial();
         sound.ButtonTap();
         loader.SwitchPanels();
     }

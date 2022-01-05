@@ -11,6 +11,7 @@ public class CubesController : MonoBehaviour
     private Cube mainRed;
     private Cube temp;
     public TutorialManager tm;
+    public LevelLoader loader;
 
     private void Awake()
     {
@@ -101,20 +102,11 @@ public class CubesController : MonoBehaviour
         List<Cube> removeList = new List<Cube>();
         foreach (Cube cube in cubes)
         {
-            if (cube.type == Cube.Type.Blue && cube.outOfBounds() && Tutorial.Getactive())
+            if (cube.outOfBounds())
             {
-                GameHandler.GetInstance().Restart();
-                Invoke("getTooStrong", 1f);
-                GameHandler.GetInstance().tooStrong();
+                removeList.Add(cube);
+                Destroy(cube.gameObj);
             }
-
-                
-            else if (cube.outOfBounds())
-            {
-            removeList.Add(cube);
-            Destroy(cube.gameObj);
-            }
-            
             else if (cube.type == Cube.Type.Blue && cube.OffTower())
             {
                 GameHandler.GetInstance().GameOver();
@@ -129,7 +121,7 @@ public class CubesController : MonoBehaviour
             GameHandler.GetInstance().GameOver();
         }
     }
-    
+
     private void updateMainRed()
     {
         if (mainRed != null && mainRed.OffTower())
@@ -183,7 +175,7 @@ public class CubesController : MonoBehaviour
         CancelInvoke();
     }
 
-    private void getTooStrong() 
+    private void getTooStrong()
     {
         GameHandler.GetInstance().tooStrong();
     }
