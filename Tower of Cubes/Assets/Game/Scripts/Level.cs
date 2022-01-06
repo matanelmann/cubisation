@@ -12,6 +12,8 @@ public class Level : MonoBehaviour
     private PlatformMover pm;
     private static bool tutorialRestart = false;
 
+    public List<SpriteRenderer> background;
+
     private void Awake()
     {
         instance = this;
@@ -32,12 +34,18 @@ public class Level : MonoBehaviour
         this.LevelNum = LevelNum;
         ST = LevelSettings.Get(LevelNum);
         cc = CubesController.GetInstance();
+        
     }
 
         
     public void StartLevel(int LevelNum)
     {
         init(LevelNum);
+        background[LevelNum].color = new Color (1, 1, 1, 1);
+        if (LevelNum > 0) 
+        {
+        background[LevelNum - 1].color = new Color (1, 1, 1, 0);
+        }
         buildTower();
         buildPlatform();
         spawnNewPlayer();
