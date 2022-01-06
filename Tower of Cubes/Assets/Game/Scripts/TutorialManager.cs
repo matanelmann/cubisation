@@ -26,10 +26,16 @@ public class TutorialManager : MonoBehaviour
         finger.position = new Vector3(mainBlue.cubeTransform.position.x, mainBlue.cubeTransform.position.y);
         fadeIn();
     }
+    public void HideFirstInstructions()
+    {
+        firstInstructionsPanel.SetActive(false);
+    }
 
     public void ShowTooStrong()
     {
         tooStrongPanel.SetActive(true);
+        CancelInvoke();
+        HideFirstInstructions();
         fadeIn();
     }
     public void ShowTooWeak()

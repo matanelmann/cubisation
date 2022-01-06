@@ -94,6 +94,7 @@ public class GameHandler : MonoBehaviour
                 }
                 else
                 {
+                    Debug.Log("show too strong");
                     tm.HideGreatJob();
                     tm.ShowTooStrong();
                 }
