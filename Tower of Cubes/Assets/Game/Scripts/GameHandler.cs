@@ -77,7 +77,7 @@ public class GameHandler : MonoBehaviour
         StartGame();
     }
 
-    public void GameOver()
+    public void GameOver(CubeState cubeState)
     {
         TrajectoryLine.EndLine();
         level.cc.CancelInvoke();
@@ -85,7 +85,24 @@ public class GameHandler : MonoBehaviour
         Debug.Log("Game Over");
         if (CrossSceneInfo.inTutorial)
         {
-            tm.ShowBlueCubes();
+            if (cubeState.main)
+            {
+                if (cubeState.xPos <= GameConfig.TOWER_X)
+                {
+                    tm.HideGreatJob();
+                    tm.ShowTooWeak();
+                }
+                else
+                {
+                    tm.HideGreatJob();
+                    tm.ShowTooStrong();
+                }
+            }
+            else
+            {
+                tm.HideGreatJob();
+                tm.ShowBlueCubes();
+            }
         }
         else
         {

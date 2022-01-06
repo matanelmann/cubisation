@@ -106,24 +106,25 @@ public class CubesController : MonoBehaviour
             {
                 if (cube.type == Cube.Type.Blue)
                 {
-                    GameHandler.GetInstance().GameOver();
+                    GameHandler.GetInstance().GameOver(new CubeState(cube));
                 }
                 removeList.Add(cube);
                 Destroy(cube.gameObj);
             }
             else if (cube.type == Cube.Type.Blue && cube.OffTower())
             {
-                GameHandler.GetInstance().GameOver();
+                Debug.Log("Here!");
+                GameHandler.GetInstance().GameOver(new CubeState(cube));
             }
         }
         foreach (Cube cube in removeList)
         {
             cubes.Remove(cube);
         }
-        if (removeList.Count > 0 && cubes == BlueCubes)
-        {
-            GameHandler.GetInstance().GameOver();
-        }
+        //if (removeList.Count > 0 && cubes == BlueCubes)
+        //{
+        //    GameHandler.GetInstance().GameOver(new CubeState(cube));
+        //}
     }
 
     private void updateMainRed()

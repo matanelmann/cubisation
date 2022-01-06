@@ -10,6 +10,7 @@ public class TutorialManager : MonoBehaviour
     public GameObject blueCubesPanel;
     public GameObject greatJobPanel;
     public GameObject FinishPanel;
+    public GameObject tooWeakPanel;
     private Transform finger;
 
     public static TutorialManager instance;
@@ -31,6 +32,11 @@ public class TutorialManager : MonoBehaviour
         tooStrongPanel.SetActive(true);
         fadeIn();
     }
+    public void ShowTooWeak()
+    {
+        tooWeakPanel.SetActive(true);
+        fadeIn();
+    }
 
     public void ShowBlueCubes()
     {
@@ -42,6 +48,10 @@ public class TutorialManager : MonoBehaviour
     {
         greatJobPanel.SetActive(true);
         fadeIn();
+    }
+    public void HideGreatJob()
+    {
+        greatJobPanel.SetActive(false);
     }
     public void ShowFinishJob()
     {
@@ -61,6 +71,8 @@ public class TutorialManager : MonoBehaviour
     {
         firstInstructionsPanel.SetActive(false);
         tooStrongPanel.SetActive(false);
+        tooWeakPanel.SetActive(false);
+        blueCubesPanel.SetActive(false);
         greatJobPanel.SetActive(false);
         FinishPanel.SetActive(false);
     }
