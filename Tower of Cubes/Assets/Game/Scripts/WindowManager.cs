@@ -20,10 +20,6 @@ public class WindowManager : MonoBehaviour
 
     public void ShowLevelPassed()
     {
-        if (CrossSceneInfo.inTutorial)
-        {
-            restartButton.interactable = false;
-        }
         levelPassedPanel.SetActive(true);
         fadeIn();
     }

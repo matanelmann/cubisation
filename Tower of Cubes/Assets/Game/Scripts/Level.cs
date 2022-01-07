@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class Level : MonoBehaviour
 {
@@ -11,8 +13,8 @@ public class Level : MonoBehaviour
     private Platform platform;
     private PlatformMover pm;
     private static bool tutorialRestart = false;
-
-    public List<SpriteRenderer> background;
+    public List<SpriteRenderer> backgrounds;
+    public TextMeshProUGUI levelText;
 
     private void Awake()
     {
@@ -34,18 +36,18 @@ public class Level : MonoBehaviour
         this.LevelNum = LevelNum;
         ST = LevelSettings.Get(LevelNum);
         cc = CubesController.GetInstance();
-        
+        foreach (SpriteRenderer background in backgrounds)
+        {
+            background.enabled = false;
+        }
+        backgrounds[LevelNum].enabled = true;
+        levelText.text = "Lvl " + LevelNum;
     }
 
-        
+
     public void StartLevel(int LevelNum)
     {
         init(LevelNum);
-        background[LevelNum].color = new Color (1, 1, 1, 1);
-        if (LevelNum > 0) 
-        {
-        background[LevelNum - 1].color = new Color (1, 1, 1, 0);
-        }
         buildTower();
         buildPlatform();
         spawnNewPlayer();
@@ -67,7 +69,7 @@ public class Level : MonoBehaviour
             cc.CreateCube(Cube.Type.Red, new Vector3(GameConfig.TOWER_X - length / 2, GetTowerHeight()), Vector3.one * scale);
         }
     }
-    
+
     public void MovePlatform()
     {
         if (pm == null)
@@ -91,9 +93,11 @@ public class Level : MonoBehaviour
 
     public void spawnNewPlayer()
     {
-        if (cc.RedCubes.Count < 2) {
+        if (cc.RedCubes.Count < 2)
+        {
             cc.CreateCube(Cube.Type.Blue, new Vector3(GameConfig.LEFT_EDGE / 2f, GameConfig.GROUND_Y + cc.GetLast(Cube.Type.Red).length / 2), Vector3.one * cc.GetLast(Cube.Type.Red).scale);
-        } else 
+        }
+        else
         {
             cc.CreateCube(Cube.Type.Blue, new Vector3(GameConfig.LEFT_EDGE / 2f, platform.pt.position.y + cc.GetLast(Cube.Type.Red).length / 2), Vector3.one * cc.GetLast(Cube.Type.Red).scale);
         }
@@ -126,6 +130,6 @@ public class Level : MonoBehaviour
             Destroy(pm.gameObject);
         }
         Destroy(platform.pt.gameObject);
-        
+
     }
 }
