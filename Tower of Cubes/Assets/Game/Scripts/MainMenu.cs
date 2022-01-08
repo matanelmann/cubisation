@@ -1,8 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using TMPro;
 using UnityEngine.UI;
 public class MainMenu : MonoBehaviour
 {
@@ -13,13 +11,13 @@ public class MainMenu : MonoBehaviour
 
     public void PlayButton()
     {
-        if(PlayerPrefs.GetInt("level", 0) == 0)
+        if (PlayerPrefs.GetInt("level", 0) == 0)
         {
             CrossSceneInfo.inTutorial = true;
             sound.ButtonTap();
             loader.SwitchPanels();
-        } 
-        else 
+        }
+        else
         {
             playButton = true;
             sound.ButtonTap();
@@ -72,15 +70,18 @@ public class MainMenu : MonoBehaviour
         loader.LoadGame();
     }
 
-    public void adjustCapButton() 
+    public void adjustCapButton()
     {
         int level = PlayerPrefs.GetInt("level", 0);
-        for (int i = 0; i < level; i++)
+        for (int i = 0; i < Mathf.Min(level, levelButton.Count); i++)
         {
             levelButton[i].interactable = true;
         }
     }
 
-
-
+    public void DeletePlayerPrefs()
+    {
+        sound.ButtonTap();
+        PlayerPrefs.DeleteAll();
+    }
 }
