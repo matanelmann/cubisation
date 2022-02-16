@@ -63,7 +63,7 @@ public class Cube
             if (!Level.GetInstance().TowerEmpty() && col.transform == cc.GetMainRed().cubeTransform)
             {
                 sound.Clack();
-                cc.StartPhaseCompletionTimer();
+                cc.StartPhaseCompletionTimer(col);
             }
         }
     }
@@ -90,6 +90,6 @@ public class Cube
 
     public bool OffTower()
     {
-        return (gameObj == null || cubeTransform.position.y < initial_Y - length || (cc.RedCubes.Count == 1 && this == cc.RedCubes[0] && cubeTransform.position.x > initial_X + length)); // If the cube fell down from the tower
+        return (gameObj == null || cubeTransform.position.y < initial_Y - length || (cc.RedCubes.Count == 1 && this == cc.RedCubes[0] && cubeTransform.position.x > initial_X + 0.6f * length)); // If the cube fell down from the tower
     }
 }

@@ -12,6 +12,8 @@ public class CubesController : MonoBehaviour
     private Cube temp;
     public TutorialManager tm;
     public LevelLoader loader;
+    public ParticleSystem ps;
+    private ParticleSystem.MainModule psMain;
 
     private void Awake()
     {
@@ -115,6 +117,10 @@ public class CubesController : MonoBehaviour
             {
                 GameHandler.GetInstance().GameOver(new CubeState(cube));
             }
+            else if (cube.type == Cube.Type.Red && cube.OffTower())
+            {
+                removeList.Add(cube);
+            }
         }
         foreach (Cube cube in removeList)
         {
@@ -138,10 +144,13 @@ public class CubesController : MonoBehaviour
         updateMainRed();
     }
 
-    public void StartPhaseCompletionTimer()
+    public void StartPhaseCompletionTimer(Collision2D col)
     {
-        temp = mainRed;
-        Invoke("ReportPhaseCompletion", 2f);
+        if (!IsInvoking())
+        {
+            temp = mainRed;
+            Invoke("ReportPhaseCompletion", 2f);
+        }
     }
 
     private void ReportPhaseCompletion()
@@ -172,6 +181,18 @@ public class CubesController : MonoBehaviour
     {
         DestroyCubes(BlueCubes);
         DestroyCubes(RedCubes);
+        GameObject[] garbageReds = GameObject.FindGameObjectsWithTag("RedCube");
+        GameObject[] garbageBlues = GameObject.FindGameObjectsWithTag("PlayerCube");
+        Debug.Log(garbageReds.Length);
+        Debug.Log(garbageBlues.Length);
+        foreach (GameObject cube in garbageReds)
+        {
+            Destroy(cube);
+        }
+        foreach (GameObject cube in garbageBlues)
+        {
+            Destroy(cube);
+        }
         CancelInvoke();
     }
 

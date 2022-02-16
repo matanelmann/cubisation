@@ -9,17 +9,17 @@ public class LevelSettings : MonoBehaviour
     {
         GsList = new List<GameSet>();
         // Level 0 (Tutorial)
-        GsList.Add(new GameSet(new Dictionary<string, float>() { { "TOWER_HEIGHT", 2f }, { "CUBE_ROOT_SCALE", 2.5f }, { "FORCE", 600f }, { "GRAVITY", 4f }, { "MASS", 3f }, { "FRICTION", 0.1f }, { "BOUNCINESS", 0.3f }, { "SCALE_DECREASE_RATE", 0.85f }}));
+        GsList.Add(new GameSet(new Dictionary<string, float>() { { "TOWER_HEIGHT", 2f }, { "CUBE_ROOT_SCALE", 2.5f }, { "FORCE", 600f }, { "GRAVITY", 4f }, { "MASS", 3f }, { "SCALE_DECREASE_RATE", 0.85f }, { "MESSY", 0 } }));
         // Level 1
-        GsList.Add(new GameSet(new Dictionary<string, float>() { { "TOWER_HEIGHT", 3f }, { "CUBE_ROOT_SCALE", 2f }, { "FORCE", 600f }, { "GRAVITY", 4f }, { "MASS", 3f }, { "FRICTION", 0.1f }, { "BOUNCINESS", 0.3f }, { "SCALE_DECREASE_RATE", 0.8f } }));
+        GsList.Add(new GameSet(new Dictionary<string, float>() { { "TOWER_HEIGHT", 3f }, { "CUBE_ROOT_SCALE", 2f }, { "FORCE", 600f }, { "GRAVITY", 4f }, { "MASS", 3f }, { "SCALE_DECREASE_RATE", 0.8f }, { "MESSY", 0 } }));
         // Level 2
-        GsList.Add(new GameSet(new Dictionary<string, float>() { { "TOWER_HEIGHT", 4f }, { "CUBE_ROOT_SCALE", 2f }, { "FORCE", 600f }, { "GRAVITY", 4f }, { "MASS", 3f }, { "FRICTION", 0.1f }, { "BOUNCINESS", 0.3f }, { "SCALE_DECREASE_RATE", 0.8f } }));
+        GsList.Add(new GameSet(new Dictionary<string, float>() { { "TOWER_HEIGHT", 4f }, { "CUBE_ROOT_SCALE", 2f }, { "FORCE", 600f }, { "GRAVITY", 4f }, { "MASS", 3f }, { "SCALE_DECREASE_RATE", 0.8f }, { "MESSY", 0 } }));
         // Level 3
-        GsList.Add(new GameSet(new Dictionary<string, float>() { { "TOWER_HEIGHT", 5f }, { "CUBE_ROOT_SCALE", 2f }, { "FORCE", 600f }, { "GRAVITY", 4f }, { "MASS", 3f }, { "FRICTION", 0.1f }, { "BOUNCINESS", 0.3f }, { "SCALE_DECREASE_RATE", 0.8f } }));
+        GsList.Add(new GameSet(new Dictionary<string, float>() { { "TOWER_HEIGHT", 6f }, { "CUBE_ROOT_SCALE", 2f }, { "FORCE", 600f }, { "GRAVITY", 4f }, { "MASS", 3f }, { "SCALE_DECREASE_RATE", 0.85f }, { "MESSY", 0 } }));
         // Level 4
-        GsList.Add(new GameSet(new Dictionary<string, float>() { { "TOWER_HEIGHT", 6f }, { "CUBE_ROOT_SCALE", 1.5f }, { "FORCE", 600f }, { "GRAVITY", 4f }, { "MASS", 3f }, { "FRICTION", 0.1f }, { "BOUNCINESS", 0.3f }, { "SCALE_DECREASE_RATE", 1f } }));
+        GsList.Add(new GameSet(new Dictionary<string, float>() { { "TOWER_HEIGHT", 8f }, { "CUBE_ROOT_SCALE", 1.5f }, { "FORCE", 600f }, { "GRAVITY", 4f }, { "MASS", 3f }, { "SCALE_DECREASE_RATE", 1f }, { "MESSY", 0 } }));
         // Level 5
-        GsList.Add(new GameSet(new Dictionary<string, float>() { { "TOWER_HEIGHT", 8f }, { "CUBE_ROOT_SCALE", 1.5f }, { "FORCE", 600f }, { "GRAVITY", 4f }, { "MASS", 3f }, { "FRICTION", 0.1f }, { "BOUNCINESS", 0.3f }, { "SCALE_DECREASE_RATE", 1f } }));
+        GsList.Add(new GameSet(new Dictionary<string, float>() { { "TOWER_HEIGHT", 10f }, { "CUBE_ROOT_SCALE", 1.5f }, { "FORCE", 600f }, { "GRAVITY", 4f }, { "MASS", 3f }, { "SCALE_DECREASE_RATE", 1f }, { "MESSY", 1 } }));
     }
 
     public static GameSet Get(int LevelNum)
@@ -39,10 +39,8 @@ public class LevelSettings : MonoBehaviour
         public float FORCE;
         public float GRAVITY;
         public float MASS;
-        public float FRICTION;
-        public float BOUNCINESS;
+        public float MESSY;
 
-        // public float BACKGROUND;
 
         public GameSet(Dictionary<string, float> dict)
         {
@@ -51,12 +49,10 @@ public class LevelSettings : MonoBehaviour
             FORCE = dict["FORCE"];
             GRAVITY = dict["GRAVITY"];
             MASS = dict["MASS"];
-            FRICTION = dict["FRICTION"];
-            BOUNCINESS = dict["BOUNCINESS"];
             SCALE_DECREASE_RATE = dict["SCALE_DECREASE_RATE"];
-            // BACKGROUND = dict["BACKGROUND"];
+            MESSY = dict["MESSY"];
         }
 
-        
+
     }
 }

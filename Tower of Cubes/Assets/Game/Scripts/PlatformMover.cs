@@ -16,15 +16,50 @@ public class PlatformMover : MonoBehaviour
     {
         if (platform != null && GameHandler.GetInstance().isGameActive())
         {
-            
-            if (platform.pt.position != platform.nextPosition || platform.pt.localScale != platform.nextScale)
+            if (level.ST.MESSY == 0)
             {
-                platform.pt.position = Vector3.MoveTowards(platform.pt.position, platform.nextPosition, GameConfig.PLATFORM_MOVING_SPEED * Time.deltaTime);
-                platform.pt.localScale = Vector3.MoveTowards(platform.pt.localScale, platform.nextScale, (GameConfig.PLATFORM_MOVING_SPEED / 50) * Time.deltaTime);
+                if (platform.pt.position != platform.nextPosition || platform.pt.localScale != platform.nextScale)
+                {
+                    platform.pt.position = Vector3.MoveTowards(platform.pt.position, platform.nextPosition, GameConfig.PLATFORM_MOVING_SPEED * Time.deltaTime);
+                    platform.pt.localScale = Vector3.MoveTowards(platform.pt.localScale, platform.nextScale, (GameConfig.PLATFORM_MOVING_SPEED / 50) * Time.deltaTime);
+                }
+                else
+                {
+                    level.FinishPlatformMovement();
+                }
             }
             else
             {
-                level.FinishPlatformMovement();
+                if (platform.pt.localScale.x >= platform.nextScale.x)
+                {
+                    if (platform.pt.localScale != platform.nextScale)
+                    {
+                        platform.pt.localScale = Vector3.MoveTowards(platform.pt.localScale, platform.nextScale, (GameConfig.PLATFORM_MOVING_SPEED / 50) * Time.deltaTime);
+                    }
+                    else if (platform.pt.position != platform.nextPosition)
+                    {
+                        platform.pt.position = Vector3.MoveTowards(platform.pt.position, platform.nextPosition, GameConfig.PLATFORM_MOVING_SPEED * Time.deltaTime);
+                    }
+                    else
+                    {
+                        level.FinishPlatformMovement();
+                    }
+                }
+                else
+                {
+                    if (platform.pt.position != platform.nextPosition)
+                    {
+                        platform.pt.position = Vector3.MoveTowards(platform.pt.position, platform.nextPosition, GameConfig.PLATFORM_MOVING_SPEED * Time.deltaTime);
+                    }
+                    else if (platform.pt.localScale != platform.nextScale)
+                    {
+                        platform.pt.localScale = Vector3.MoveTowards(platform.pt.localScale, platform.nextScale, (GameConfig.PLATFORM_MOVING_SPEED / 50) * Time.deltaTime);
+                    }
+                    else
+                    {
+                        level.FinishPlatformMovement();
+                    }
+                }
             }
         }
     }

@@ -84,4 +84,10 @@ public class MainMenu : MonoBehaviour
         sound.ButtonTap();
         PlayerPrefs.DeleteAll();
     }
+
+    public void SetPlayerPrefs()
+    {
+        sound.ButtonTap();
+        PlayerPrefs.SetInt("level", 5);
+    }
 }

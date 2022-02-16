@@ -23,7 +23,7 @@ public class TutorialManager : MonoBehaviour
     public void ShowFirstInstructions(Cube mainBlue)
     {
         firstInstructionsPanel.SetActive(true);
-        finger.position = new Vector3(mainBlue.cubeTransform.position.x, mainBlue.cubeTransform.position.y);
+        finger.position = new Vector3(mainBlue.cubeTransform.position.x * -1.2f, mainBlue.cubeTransform.position.y + mainBlue.length * 1.65f);
         fadeIn();
     }
     public void HideFirstInstructions()

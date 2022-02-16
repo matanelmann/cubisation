@@ -61,12 +61,27 @@ public class Level : MonoBehaviour
 
     private void buildTower()
     {
-        float scale, length;
-        for (int i = 0; i < ST.TOWER_HEIGHT; i++)
+        if (ST.MESSY == 1)
         {
-            scale = ST.CUBE_ROOT_SCALE * Mathf.Pow(ST.SCALE_DECREASE_RATE, i);
-            length = scale * 5.12f;
-            cc.CreateCube(Cube.Type.Red, new Vector3(GameConfig.TOWER_X - length / 2, GetTowerHeight()), Vector3.one * scale);
+            float scale, length;
+            int side = -1;
+            for (int i = 0; i < ST.TOWER_HEIGHT; i++)
+            {
+                scale = ST.CUBE_ROOT_SCALE * Mathf.Pow(ST.SCALE_DECREASE_RATE, i);
+                length = scale * 5.12f;
+                cc.CreateCube(Cube.Type.Red, new Vector3(GameConfig.TOWER_X - length / 2 + side * length / 10f, GetTowerHeight()), Vector3.one * scale);
+                side *= -1;
+            }
+        }
+        else
+        {
+            float scale, length;
+            for (int i = 0; i < ST.TOWER_HEIGHT; i++)
+            {
+                scale = ST.CUBE_ROOT_SCALE * Mathf.Pow(ST.SCALE_DECREASE_RATE, i);
+                length = scale * 5.12f;
+                cc.CreateCube(Cube.Type.Red, new Vector3(GameConfig.TOWER_X - length / 2, GetTowerHeight()), Vector3.one * scale);
+            }
         }
     }
 

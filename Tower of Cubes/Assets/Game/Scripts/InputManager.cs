@@ -29,7 +29,7 @@ public class InputManager : MonoBehaviour
             dragging = false;
             dragEndPos = mousePos;
             float dragLength = dragStartPos.x - dragEndPos.x;
-            if (dragLength > (mainBlue.length / 4)) // Prevent pushing the cube to the left
+            if (dragLength > (mainBlue.length / 8)) // Prevent pushing the cube to the left
             {
                 mainBlue.Push(dragLength);
             }
