@@ -63,7 +63,7 @@ public class Cube
             if (!Level.GetInstance().TowerEmpty() && col.transform == cc.GetMainRed().cubeTransform)
             {
                 sound.Clack();
-                cc.StartPhaseCompletionTimer(col);
+                //cc.StartPhaseCompletionTimer();
             }
         }
     }
@@ -85,7 +85,11 @@ public class Cube
 
     public bool isMain()
     {
-        return (this == cc.GetMainBlue());
+        if (this.type == Cube.Type.Blue)
+        {
+            return (this == cc.GetMainBlue());
+        }
+        return (this == cc.GetMainRed());
     }
 
     public bool OffTower()

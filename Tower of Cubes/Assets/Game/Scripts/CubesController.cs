@@ -110,6 +110,10 @@ public class CubesController : MonoBehaviour
                 {
                     GameHandler.GetInstance().GameOver(new CubeState(cube));
                 }
+                else
+                {
+                    Invoke("ReportPhaseCompletion", 0.5f);
+                }
                 removeList.Add(cube);
                 Destroy(cube.gameObj);
             }
@@ -120,6 +124,13 @@ public class CubesController : MonoBehaviour
             else if (cube.type == Cube.Type.Red && cube.OffTower())
             {
                 removeList.Add(cube);
+                // @ NEW @
+                //if (cube.isMain())
+                //{
+
+                //}
+                Invoke("ReportPhaseCompletion", 0.5f);
+                // @ NEW @
             }
         }
         foreach (Cube cube in removeList)
@@ -144,7 +155,7 @@ public class CubesController : MonoBehaviour
         updateMainRed();
     }
 
-    public void StartPhaseCompletionTimer(Collision2D col)
+    public void StartPhaseCompletionTimer()
     {
         if (!IsInvoking())
         {
@@ -159,7 +170,7 @@ public class CubesController : MonoBehaviour
         {
             GameHandler.GetInstance().LevelPassed();
         }
-        else if (temp != mainRed)
+        else //if (temp != mainRed)
         {
             Level.GetInstance().MovePlatform();
         }
@@ -183,8 +194,6 @@ public class CubesController : MonoBehaviour
         DestroyCubes(RedCubes);
         GameObject[] garbageReds = GameObject.FindGameObjectsWithTag("RedCube");
         GameObject[] garbageBlues = GameObject.FindGameObjectsWithTag("PlayerCube");
-        Debug.Log(garbageReds.Length);
-        Debug.Log(garbageBlues.Length);
         foreach (GameObject cube in garbageReds)
         {
             Destroy(cube);
